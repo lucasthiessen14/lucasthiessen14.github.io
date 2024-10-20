@@ -653,20 +653,11 @@ footer {
     transform: translateY(-50%);
     margin-left: 300px;
     padding: 15px;
-    text-align: left !important;
 
     h3 {
         font-size: 1.5em;
         font-weight: 300;
         color: $heading;
-        margin: 0 0 15px 0;
-    }
-
-    h4 {
-        color: red;
-        clear: both;
-        font-size: 1.2em;
-        font-weight: 300;
         margin: 0 0 15px 0;
     }
 
@@ -683,11 +674,6 @@ footer {
         margin: 0;
         padding: 30px 15px;
         transform: none;
-        text-align: left !important;
-
-        h3 {
-            margin: 0px;
-        }
     }
 }
 
