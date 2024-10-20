@@ -79,7 +79,7 @@
                 <div class="col-md-8">
                     <p>
                         Name: Lucas Thiessen <br>
-                        Age: 20 <br><br>
+                        Age: <span id="age"></span> <br><br>
                         Highly organized and creative student at the University of Waterloo. Currently pursuing a BAS in Computer engineering. Extensive problem-solving skills and enjoy working collaboratively with others. Strong customer service and leadership skills demonstrated through 5 years of experience as a server and supervisor at The Family Central Restaurant. <br><br>
                         <a href="#contact">Contact</a>
                     </p>
@@ -359,6 +359,12 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="js/scripts.min.js"></script>
+    <script>
+        const currentYear = new Date().getFullYear();
+        const birthYear = currentYear - 23; // Set your age here
+        const age = currentYear - birthYear - 1; // Subtract 1 to match your example
+        document.getElementById('age').innerText = age;
+    </script>
 </body>
 
 </html>
