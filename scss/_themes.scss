@@ -20,21 +20,55 @@
 }
 
 [data-theme='light'] {
-    --bg: #f4f7fb;
+    --bg: #e8edf4;
     --bg-elevated: #ffffff;
-    --bg-alt: #e8eef6;
+    --bg-alt: #dce4ef;
     --surface: #ffffff;
-    --surface-hover: #f0f5fc;
-    --border: #d0dae8;
-    --text: #3d4f66;
-    --text-muted: #5c6f88;
-    --heading: #0f172a;
-    --accent: #0891b2;
-    --accent-dim: #0e7490;
-    --accent-glow: rgba(8, 145, 178, 0.2);
-    --hero-mesh-1: rgba(8, 145, 178, 0.12);
-    --hero-mesh-2: rgba(99, 102, 241, 0.08);
-    --nav-bg: rgba(244, 247, 251, 0.88);
-    --shadow: 0 8px 28px rgba(15, 23, 42, 0.08);
-    --progress-bg: var(--border);
+    --surface-hover: #f1f5fa;
+    --border: #9aadc4;
+    --text: #1a2838;
+    --text-muted: #3f5168;
+    --heading: #070d16;
+    --accent: #0a7f96;
+    --accent-dim: #066078;
+    --accent-glow: rgba(10, 127, 150, 0.28);
+    --hero-mesh-1: rgba(10, 127, 150, 0.18);
+    --hero-mesh-2: rgba(79, 70, 229, 0.1);
+    --nav-bg: rgba(232, 237, 244, 0.94);
+    --shadow: 0 4px 16px rgba(15, 23, 42, 0.1), 0 12px 36px rgba(15, 23, 42, 0.08);
+    --progress-bg: #b0bfd4;
+}
+
+// Light-mode polish: clearer surfaces and legibility
+[data-theme='light'] {
+    .hero__grid {
+        opacity: 0.5;
+    }
+
+    .site-nav__link {
+        color: var(--text);
+
+        &:hover,
+        &.is-active {
+            color: var(--accent);
+        }
+    }
+
+    .experience-card,
+    .project-card,
+    .education-card,
+    .skills-group,
+    .contact__item {
+        box-shadow: var(--shadow);
+    }
+
+    .btn--primary {
+        color: #ffffff;
+    }
+
+    .tag {
+        background: color-mix(in srgb, var(--accent) 10%, var(--bg-alt));
+        color: var(--accent-dim);
+        border-color: color-mix(in srgb, var(--accent) 35%, var(--border));
+    }
 }

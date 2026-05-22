@@ -86,19 +86,20 @@
 }
 
 .projects__more {
-    display: none;
+    display: flex;
     flex-direction: column;
     gap: $space-xl;
     margin-top: $space-xl;
 
-    &.is-visible {
-        display: flex;
+    &[hidden] {
+        display: none !important;
     }
 }
 
 .projects__actions {
     text-align: center;
     margin-top: $space-xl;
+    flex-shrink: 0;
 }
 
 @media (prefers-reduced-motion: reduce) {

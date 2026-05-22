@@ -219,27 +219,25 @@
         el.style.transition = 'opacity 0.2s ease';
     }
 
-    // --- Projects toggle ---
+    // --- Projects toggle (single button) ---
     function initProjects() {
         var more = $('#more-projects');
-        var btnMore = $('#view-more-projects');
-        var btnLess = $('#view-less-projects');
-        if (!more || !btnMore || !btnLess) return;
+        var toggle = $('#projects-toggle');
+        if (!more || !toggle) return;
 
-        btnMore.addEventListener('click', function () {
-            more.classList.add('is-visible');
-            btnMore.hidden = true;
-            btnLess.hidden = false;
-            $$('.projects__more .reveal').forEach(function (el) {
-                el.classList.add('is-visible');
-            });
-        });
+        toggle.addEventListener('click', function () {
+            var opening = more.hidden;
+            more.hidden = !opening;
+            toggle.setAttribute('aria-expanded', opening ? 'true' : 'false');
+            toggle.textContent = opening ? 'View Less Projects' : 'View More Projects';
 
-        btnLess.addEventListener('click', function () {
-            more.classList.remove('is-visible');
-            btnMore.hidden = false;
-            btnLess.hidden = true;
-            scrollToSelector('#projects');
+            if (opening) {
+                $$('.projects__more .reveal').forEach(function (el) {
+                    el.classList.add('is-visible');
+                });
+            } else {
+                scrollToSelector('#projects');
+            }
         });
     }
 

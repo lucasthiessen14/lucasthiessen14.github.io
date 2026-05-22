@@ -168,23 +168,56 @@
 // Skills
 .skills-grid {
     display: grid;
-    gap: $space-xl;
-    max-width: 900px;
-    margin: 0 auto;
+    gap: $space-lg;
+    align-items: stretch;
 
     @media (min-width: $bp-md) {
         grid-template-columns: repeat(3, 1fr);
+        gap: $space-xl;
+    }
+}
+
+.skills-group {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: $space-lg;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: $radius-lg;
+    box-shadow: var(--shadow);
+    transition: border-color $transition, box-shadow $transition;
+
+    @media (prefers-reduced-motion: no-preference) {
+        &:hover {
+            border-color: color-mix(in srgb, var(--accent) 40%, var(--border));
+            box-shadow: 0 0 0 1px var(--accent-glow), var(--shadow);
+        }
     }
 }
 
 .skills-group__label {
+    display: flex;
+    align-items: center;
+    gap: $space-sm;
     font-family: $font-mono;
-    font-size: 0.7rem;
+    font-size: 0.72rem;
     font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.1em;
     color: var(--accent);
-    margin-bottom: $space-md;
+    margin: 0 0 $space-md;
+    padding-bottom: $space-md;
+    border-bottom: 1px solid var(--border);
+
+    &::before {
+        content: '';
+        flex-shrink: 0;
+        width: 3px;
+        height: 1.1em;
+        border-radius: $radius-full;
+        background: var(--accent);
+    }
 }
 
 .skills-group__list {
@@ -192,21 +225,29 @@
     flex-wrap: wrap;
     gap: $space-sm;
     list-style: none;
+    flex: 1;
+    align-content: flex-start;
 }
 
 .skills-group__item {
-    padding: $space-xs $space-md;
-    font-size: 0.875rem;
+    padding: 0.4rem 0.85rem;
+    font-family: $font-mono;
+    font-size: 0.8rem;
     font-weight: 500;
-    color: var(--heading);
-    background: var(--surface);
+    color: var(--text);
+    background: var(--bg-alt);
     border: 1px solid var(--border);
     border-radius: $radius-full;
-    transition: border-color $transition, background $transition;
+    transition: border-color $transition, background $transition, color $transition, transform $transition, box-shadow $transition;
 
-    &:hover {
-        border-color: var(--accent);
-        background: var(--surface-hover);
+    @media (prefers-reduced-motion: no-preference) {
+        &:hover {
+            border-color: var(--accent);
+            background: color-mix(in srgb, var(--accent) 12%, var(--bg-alt));
+            color: var(--heading);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 14px var(--accent-glow);
+        }
     }
 }
 

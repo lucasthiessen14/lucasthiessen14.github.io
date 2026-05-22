@@ -91,7 +91,7 @@
 
         <section class="section" id="about">
             <div class="container">
-                <h2 class="section__title reveal">About Me</h2>
+                <h2 class="section__title reveal"><span class="section__number">01</span><span class="section__title-text">About Me</span></h2>
                 <div class="about__grid reveal">
                     <div class="about__photo">
                         <img src="images/profile_pic.jpg" alt="Portrait of Lucas Thiessen" width="280" height="280">
@@ -116,7 +116,7 @@
 
         <section class="section section--alt" id="experience">
             <div class="container">
-                <h2 class="section__title reveal">Experience</h2>
+                <h2 class="section__title reveal"><span class="section__number">02</span><span class="section__title-text">Experience</span></h2>
                 <div class="experience-list">
                     <article class="experience-card reveal">
                         <p class="experience-card__date">January 2024 – Present</p>
@@ -185,7 +185,7 @@
 
         <section class="section" id="education">
             <div class="container">
-                <h2 class="section__title reveal">Education</h2>
+                <h2 class="section__title reveal"><span class="section__number">03</span><span class="section__title-text">Education</span></h2>
                 <div class="education-list">
                     <article class="education-card reveal">
                         <div class="education-card__header">
@@ -209,7 +209,7 @@
 
         <section class="section section--alt" id="projects">
             <div class="container">
-                <h2 class="section__title reveal">Featured Projects</h2>
+                <h2 class="section__title reveal"><span class="section__number">04</span><span class="section__title-text">Featured Projects</span></h2>
                 <div class="projects__grid">
                     <article class="project-card project-card--featured reveal" data-tags="embedded robotics cpp">
                         <div class="project-card__body">
@@ -263,7 +263,7 @@
                         </div>
                     </article>
                 </div>
-                <div class="projects__more" id="more-projects">
+                <div class="projects__more" id="more-projects" hidden>
                     <article class="project-card reveal" data-tags="java compilers">
                         <div class="project-card__body">
                             <p class="project-card__meta">University of Waterloo · 2023</p>
@@ -296,17 +296,16 @@
                     </article>
                 </div>
                 <div class="projects__actions">
-                    <button type="button" class="btn btn--ghost" id="view-more-projects">View More Projects</button>
-                    <button type="button" class="btn btn--text" id="view-less-projects" hidden>View Less Projects</button>
+                    <button type="button" class="btn btn--ghost" id="projects-toggle" aria-expanded="false" aria-controls="more-projects">View More Projects</button>
                 </div>
             </div>
         </section>
 
         <section class="section" id="skills">
             <div class="container">
-                <h2 class="section__title reveal">Skills</h2>
-                <div class="skills-grid reveal">
-                    <div class="skills-group">
+                <h2 class="section__title reveal"><span class="section__number">05</span><span class="section__title-text">Skills</span></h2>
+                <div class="skills-grid">
+                    <div class="skills-group reveal">
                         <h3 class="skills-group__label">Languages &amp; hardware</h3>
                         <ul class="skills-group__list">
                             <li class="skills-group__item">C++/C</li>
@@ -319,7 +318,7 @@
                             <li class="skills-group__item">FPGA</li>
                         </ul>
                     </div>
-                    <div class="skills-group">
+                    <div class="skills-group reveal">
                         <h3 class="skills-group__label">Platforms &amp; tools</h3>
                         <ul class="skills-group__list">
                             <li class="skills-group__item">UNIX/Linux</li>
@@ -328,7 +327,7 @@
                             <li class="skills-group__item">PuTTY</li>
                         </ul>
                     </div>
-                    <div class="skills-group">
+                    <div class="skills-group reveal">
                         <h3 class="skills-group__label">Web &amp; data</h3>
                         <ul class="skills-group__list">
                             <li class="skills-group__item">JavaScript</li>
@@ -347,7 +346,7 @@
 
         <section class="section contact" id="contact">
             <div class="container contact__inner reveal">
-                <h2 class="contact__title">Get in Touch</h2>
+                <h2 class="section__title contact__title"><span class="section__number">06</span><span class="section__title-text">Get in Touch</span></h2>
                 <p class="contact__subtitle">Open to opportunities and collaborations.</p>
                 <div class="contact__items">
                     <div class="contact__item">

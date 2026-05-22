@@ -82,6 +82,10 @@ ul {
 }
 
 .section__title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $space-xs;
     font-size: clamp(1.5rem, 4vw, 2rem);
     font-weight: 700;
     text-align: center;
@@ -97,6 +101,18 @@ ul {
         background: var(--accent);
         border-radius: $radius-full;
     }
+}
+
+.section__number {
+    font-family: $font-mono;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    color: var(--accent);
+}
+
+.section__title-text {
+    color: var(--heading);
 }
 
 .reveal {
