@@ -1,0 +1,220 @@
+@use 'variables' as *;
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    -webkit-text-size-adjust: 100%;
+    scroll-padding-top: $nav-height;
+}
+
+body {
+    margin: 0;
+    font-family: $font-sans;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--text);
+    background: var(--bg);
+    overflow-x: clip;
+}
+
+body.nav-open {
+    overflow: hidden;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+a {
+    color: var(--accent);
+    text-decoration: none;
+    transition: color $transition;
+
+    &:hover {
+        color: var(--accent-dim);
+    }
+
+    &:focus {
+        outline: none;
+    }
+
+    &:focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 3px;
+        border-radius: 2px;
+    }
+}
+
+h1, h2, h3, h4 {
+    color: var(--heading);
+    margin: 0 0 $space-md;
+    line-height: 1.2;
+}
+
+p {
+    margin: 0 0 $space-md;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 100%;
+    max-width: $max-width;
+    margin: 0 auto;
+    padding: 0 $space-lg;
+}
+
+.section {
+    padding: $space-3xl 0;
+}
+
+.section--alt {
+    background: var(--bg-alt);
+}
+
+.section__title {
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: $space-2xl;
+    letter-spacing: -0.02em;
+
+    &::after {
+        content: '';
+        display: block;
+        width: 48px;
+        height: 3px;
+        margin: $space-sm auto 0;
+        background: var(--accent);
+        border-radius: $radius-full;
+    }
+}
+
+.reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+
+    &.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: $space-xs;
+    padding: 0.75rem 1.35rem;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    border-radius: $radius-full;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: background $transition, color $transition, border-color $transition, box-shadow $transition;
+    text-decoration: none;
+    font-family: inherit;
+
+    &--primary {
+        background: var(--accent);
+        color: var(--bg);
+        border-color: var(--accent);
+
+        &:hover {
+            background: var(--accent-dim);
+            border-color: var(--accent-dim);
+            color: var(--bg);
+            box-shadow: 0 0 24px var(--accent-glow);
+        }
+    }
+
+    &--ghost {
+        background: transparent;
+        color: var(--heading);
+        border-color: var(--border);
+
+        &:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+    }
+
+    &--text {
+        background: none;
+        border: none;
+        color: var(--accent);
+        padding: $space-sm 0;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
+
+.tag {
+    display: inline-block;
+    font-family: $font-mono;
+    font-size: 0.7rem;
+    font-weight: 500;
+    padding: 0.2rem 0.55rem;
+    border-radius: $radius-sm;
+    background: var(--bg-alt);
+    color: var(--accent);
+    border: 1px solid var(--border);
+}
+
+.toast {
+    position: fixed;
+    bottom: max(1.5rem, env(safe-area-inset-bottom));
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    visibility: hidden;
+    padding: 0;
+    border: none;
+    background: transparent;
+    z-index: 2000;
+    pointer-events: none;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+
+    &.is-shown {
+        opacity: 1;
+        visibility: visible;
+        padding: $space-sm $space-lg;
+        background: var(--surface);
+        color: var(--heading);
+        border: 1px solid var(--border);
+        border-radius: $radius-md;
+        font-size: 0.875rem;
+        box-shadow: var(--shadow);
+    }
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}

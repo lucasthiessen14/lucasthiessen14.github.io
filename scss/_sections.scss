@@ -1,0 +1,290 @@
+@use 'variables' as *;
+
+// About
+.about__grid {
+    display: grid;
+    gap: $space-2xl;
+    align-items: start;
+
+    @media (min-width: $bp-lg) {
+        grid-template-columns: 280px 1fr;
+        gap: $space-3xl;
+    }
+}
+
+.about__photo {
+    justify-self: center;
+
+    img {
+        border-radius: $radius-lg;
+        box-shadow: var(--shadow);
+        border: 2px solid var(--border);
+    }
+}
+
+.about__stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $space-sm;
+    margin-bottom: $space-lg;
+    list-style: none;
+}
+
+.about__stat {
+    font-family: $font-mono;
+    font-size: 0.75rem;
+    padding: $space-xs $space-sm;
+    border-radius: $radius-sm;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+}
+
+.about__text {
+    color: var(--text);
+    font-size: 1.05rem;
+}
+
+// Experience
+.experience-list {
+    display: flex;
+    flex-direction: column;
+    gap: $space-lg;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.experience-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: $radius-lg;
+    padding: $space-lg;
+    transition: border-color $transition, box-shadow $transition;
+
+    &:hover {
+        border-color: var(--accent);
+        box-shadow: 0 0 0 1px var(--accent-glow);
+    }
+}
+
+.experience-card__date {
+    font-family: $font-mono;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--accent);
+    margin-bottom: $space-sm;
+    letter-spacing: 0.03em;
+}
+
+.experience-card__company {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: $space-xs;
+}
+
+.experience-card__role {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    margin-bottom: $space-md;
+}
+
+.experience-card__bullets {
+    list-style: none;
+    padding: 0;
+
+    li {
+        position: relative;
+        padding-left: 1.25rem;
+        margin-bottom: $space-sm;
+        font-size: 0.9rem;
+        color: var(--text);
+        line-height: 1.55;
+
+        &::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+}
+
+// Education
+.education-list {
+    display: flex;
+    flex-direction: column;
+    gap: $space-lg;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.education-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: $radius-lg;
+    padding: $space-lg;
+}
+
+.education-card__header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: $space-sm;
+    margin-bottom: $space-xs;
+}
+
+.education-card__school {
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.education-card__date {
+    font-family: $font-mono;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+.education-card__degree {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    font-weight: 500;
+    margin-bottom: $space-sm;
+}
+
+.education-card__detail {
+    font-size: 0.9rem;
+    color: var(--text);
+    margin: 0;
+}
+
+// Skills
+.skills-grid {
+    display: grid;
+    gap: $space-xl;
+    max-width: 900px;
+    margin: 0 auto;
+
+    @media (min-width: $bp-md) {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.skills-group__label {
+    font-family: $font-mono;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+    margin-bottom: $space-md;
+}
+
+.skills-group__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $space-sm;
+    list-style: none;
+}
+
+.skills-group__item {
+    padding: $space-xs $space-md;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--heading);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: $radius-full;
+    transition: border-color $transition, background $transition;
+
+    &:hover {
+        border-color: var(--accent);
+        background: var(--surface-hover);
+    }
+}
+
+// Contact
+.contact {
+    background: linear-gradient(180deg, var(--bg-alt) 0%, var(--surface) 100%);
+    border-top: 1px solid var(--border);
+}
+
+.contact__inner {
+    text-align: center;
+    max-width: 480px;
+    margin: 0 auto;
+}
+
+.contact__title {
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    margin-bottom: $space-sm;
+}
+
+.contact__subtitle {
+    color: var(--text-muted);
+    margin-bottom: $space-2xl;
+}
+
+.contact__items {
+    display: flex;
+    flex-direction: column;
+    gap: $space-lg;
+    text-align: left;
+}
+
+.contact__item {
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: $radius-md;
+    padding: $space-lg;
+}
+
+.contact__label {
+    display: block;
+    font-family: $font-mono;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    margin-bottom: $space-xs;
+}
+
+.contact__row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: $space-sm;
+}
+
+.contact__value {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--heading);
+    word-break: break-word;
+}
+
+.contact__copy {
+    margin-left: auto;
+    flex-shrink: 0;
+    padding: $space-xs $space-sm;
+    font-size: 0.75rem;
+    font-family: $font-mono;
+    border: 1px solid var(--border);
+    border-radius: $radius-sm;
+    background: var(--surface);
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: color $transition, border-color $transition;
+
+    &:hover {
+        color: var(--accent);
+        border-color: var(--accent);
+    }
+}
