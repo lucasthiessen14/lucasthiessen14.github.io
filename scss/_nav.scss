@@ -166,7 +166,7 @@
     }
 }
 
-@media (min-width: $bp-md + 1) {
+@media (min-width: $bp-md-up) {
     .site-nav__panel {
         flex: 1;
         display: flex;

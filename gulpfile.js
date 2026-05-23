@@ -25,7 +25,11 @@ gulp.task('scripts', function() {
 gulp.task('styles', function () {
     return gulp.src('./scss/styles.scss')
         .pipe(wait(100))
-        .pipe(sass({ outputStyle: 'compressed' }).on('error', sass.logError))
+        .pipe(sass({
+            style: 'expanded',
+            sourceMap: true,
+            sourceMapIncludeSources: true
+        }).on('error', sass.logError))
         .pipe(gulp.dest('./css'));
 });
 

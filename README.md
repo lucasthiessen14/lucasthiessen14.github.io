@@ -19,7 +19,7 @@ GitHub Pages serves static files from this repo. Compile assets before pushing:
 npm run build
 ```
 
-This generates `css/styles.css` and `js/main.min.js`.
+This generates `css/styles.css` (expanded, readable CSS with a source map) and `js/main.min.js`. Edit styles in `scss/` — not in the compiled CSS.
 
 ## Stack
 
