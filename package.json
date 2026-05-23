@@ -6,6 +6,8 @@
   "scripts": {
     "watch": "gulp watch",
     "build": "gulp build",
+    "serve": "live-server . --port=8080 --open=/index.html",
+    "preview": "npm run build && npm run serve",
     "dev": "concurrently -n gulp,server -c blue,magenta \"gulp watch\" \"live-server . --port=8080 --open=/index.html\""
   },
   "keywords": [
