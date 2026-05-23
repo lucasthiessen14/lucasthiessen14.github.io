@@ -274,6 +274,7 @@
 }
 
 .contact__form {
+    position: relative;
     display: flex;
     flex-direction: column;
     gap: $space-lg;
@@ -379,6 +380,8 @@
 
 .contact__direct-list {
     list-style: none;
+    padding: 0;
+    margin: 0;
     display: grid;
     gap: $space-sm;
 
@@ -479,11 +482,15 @@
 
 .contact__honeypot {
     position: absolute;
+    left: -9999px;
     width: 1px;
     height: 1px;
-    padding: 0;
-    margin: -1px;
+    opacity: 0;
+    pointer-events: none;
     overflow: hidden;
     clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
     border: 0;
+    padding: 0;
+    margin: 0;
 }
