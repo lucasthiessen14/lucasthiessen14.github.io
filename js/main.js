@@ -286,6 +286,53 @@
         });
     }
 
+    // --- Contact form (Web3Forms) ---
+    function initContactForm() {
+        var form = $('#contact-form');
+        if (!form) return;
+
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            var honeypot = form.querySelector('[name="botcheck"]');
+            if (honeypot && honeypot.checked) return;
+
+            var submitBtn = form.querySelector('[type="submit"]');
+            var defaultLabel = submitBtn.textContent;
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sending…';
+
+            var payload = Object.fromEntries(new FormData(form).entries());
+
+            fetch(form.action, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Accept: 'application/json'
+                },
+                body: JSON.stringify(payload)
+            })
+                .then(function (res) {
+                    return res.json();
+                })
+                .then(function (data) {
+                    if (data.success) {
+                        showToast('Message sent — thanks for reaching out!');
+                        form.reset();
+                    } else {
+                        showToast(data.message || 'Could not send message. Please try again.');
+                    }
+                })
+                .catch(function () {
+                    showToast('Could not send message. Please try again.');
+                })
+                .finally(function () {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = defaultLabel;
+                });
+        });
+    }
+
     // --- Footer year + age ---
     function initDates() {
         var y = new Date().getFullYear();
@@ -304,6 +351,7 @@
         initHeroTagline();
         initProjects();
         initCopyButtons();
+        initContactForm();
         initDates();
     }
 

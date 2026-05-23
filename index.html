@@ -348,29 +348,53 @@
             <div class="container contact__inner reveal">
                 <h2 class="section__title contact__title"><span class="section__number">06</span><span class="section__title-text">Get in Touch</span></h2>
                 <p class="contact__subtitle">Open to opportunities and collaborations.</p>
-                <div class="contact__items">
-                    <div class="contact__item">
-                        <span class="contact__label">Personal email</span>
-                        <div class="contact__row">
-                            <a href="mailto:lucasthiessen14@gmail.com" class="contact__value">lucasthiessen14@gmail.com</a>
-                            <button type="button" class="contact__copy" data-copy="lucasthiessen14@gmail.com">Copy</button>
+                <form class="contact__form reveal" id="contact-form" action="https://api.web3forms.com/submit" method="POST" novalidate>
+                    <input type="hidden" name="access_key" value="9d1538be-3bd3-4898-a882-61e33f6448ae">
+                    <input type="hidden" name="subject" value="New message from lucasthiessen.com">
+                    <input type="hidden" name="from_name" value="Portfolio — lucasthiessen.com">
+                    <input type="checkbox" name="botcheck" class="contact__honeypot" tabindex="-1" autocomplete="off" aria-hidden="true">
+                    <div class="contact__row-fields">
+                        <div class="contact__field">
+                            <label class="contact__label" for="contact-name">Name</label>
+                            <input class="contact__input" type="text" id="contact-name" name="name" required autocomplete="name" placeholder="Your name">
+                        </div>
+                        <div class="contact__field">
+                            <label class="contact__label" for="contact-email">Email</label>
+                            <input class="contact__input" type="email" id="contact-email" name="email" required autocomplete="email" placeholder="you@example.com">
                         </div>
                     </div>
-                    <div class="contact__item">
-                        <span class="contact__label">School email</span>
-                        <div class="contact__row">
-                            <a href="mailto:lucas.thiessen@uwaterloo.ca" class="contact__value">lucas.thiessen@uwaterloo.ca</a>
-                            <button type="button" class="contact__copy" data-copy="lucas.thiessen@uwaterloo.ca">Copy</button>
-                        </div>
+                    <div class="contact__field">
+                        <label class="contact__label" for="contact-message">Message</label>
+                        <textarea class="contact__textarea" id="contact-message" name="message" rows="5" required placeholder="What would you like to discuss?"></textarea>
                     </div>
-                    <div class="contact__item">
-                        <span class="contact__label">Phone</span>
-                        <div class="contact__row">
-                            <a href="tel:+12269702402" class="contact__value">226-970-2402</a>
-                            <button type="button" class="contact__copy" data-copy="226-970-2402">Copy</button>
-                        </div>
+                    <button type="submit" class="btn btn--primary contact__submit">Send message</button>
+                    <div class="contact__direct" aria-label="Direct contact options">
+                        <span class="contact__direct-label">Or reach me directly</span>
+                        <ul class="contact__direct-list">
+                            <li class="contact__direct-item">
+                                <span class="contact__direct-type">Personal</span>
+                                <div class="contact__direct-row">
+                                    <a href="mailto:lucasthiessen14@gmail.com" class="contact__direct-link">lucasthiessen14@gmail.com</a>
+                                    <button type="button" class="contact__copy" data-copy="lucasthiessen14@gmail.com" aria-label="Copy personal email">Copy</button>
+                                </div>
+                            </li>
+                            <li class="contact__direct-item">
+                                <span class="contact__direct-type">School</span>
+                                <div class="contact__direct-row">
+                                    <a href="mailto:lucas.thiessen@uwaterloo.ca" class="contact__direct-link">lucas.thiessen@uwaterloo.ca</a>
+                                    <button type="button" class="contact__copy" data-copy="lucas.thiessen@uwaterloo.ca" aria-label="Copy school email">Copy</button>
+                                </div>
+                            </li>
+                            <li class="contact__direct-item contact__direct-item--solo">
+                                <span class="contact__direct-type">Phone</span>
+                                <div class="contact__direct-row">
+                                    <a href="tel:+12269702402" class="contact__direct-link">226-970-2402</a>
+                                    <button type="button" class="contact__copy" data-copy="226-970-2402" aria-label="Copy phone number">Copy</button>
+                                </div>
+                            </li>
+                        </ul>
                     </div>
-                </div>
+                </form>
             </div>
         </section>
     </main>
