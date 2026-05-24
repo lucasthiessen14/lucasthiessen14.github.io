@@ -29,30 +29,6 @@
     margin: 0;
 }
 
-.site-footer__top {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    border: 2px solid var(--border);
-    border-radius: 50%;
-    color: var(--text-muted);
-    background: var(--surface);
-    cursor: pointer;
-    transition: border-color $transition, color $transition;
-
-    &:hover {
-        border-color: var(--accent);
-        color: var(--accent);
-    }
-
-    svg {
-        width: 18px;
-        height: 18px;
-    }
-}
-
 .site-footer__social {
     display: flex;
     gap: $space-sm;

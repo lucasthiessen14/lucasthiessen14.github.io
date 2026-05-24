@@ -52,7 +52,9 @@
     font-size: clamp(2.25rem, 8vw, 3.75rem);
     font-weight: 800;
     letter-spacing: -0.03em;
+    line-height: 1.08;
     margin-bottom: $space-sm;
+    color: var(--heading);
     background: linear-gradient(135deg, var(--heading) 0%, var(--accent) 100%);
     -webkit-background-clip: text;
     background-clip: text;
@@ -61,22 +63,34 @@
 
 .hero__tagline {
     font-size: clamp(1rem, 3vw, 1.25rem);
-    color: var(--text-muted);
-    min-height: 1.6em;
+    color: var(--text);
+    min-height: 1.5em;
     margin-bottom: $space-xl;
 
     #hero-role {
+        display: inline-block;
         color: var(--accent);
-        font-weight: 500;
+        font-weight: 600;
+        opacity: 1;
     }
 }
 
 .hero__cta {
-    display: flex;
-    flex-wrap: wrap;
+    display: inline-grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 1fr;
     gap: $space-md;
-    justify-content: center;
+    width: max-content;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
     margin-bottom: $space-xl;
+
+    .btn {
+        width: 100%;
+        white-space: nowrap;
+        justify-content: center;
+    }
 }
 
 .hero__social {
@@ -110,51 +124,58 @@
     }
 }
 
-.hero__scroll {
-    position: absolute;
-    bottom: $space-xl;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    border: 2px solid var(--border);
-    border-radius: 50%;
-    color: var(--text-muted);
-    background: var(--surface);
-    cursor: pointer;
-    text-decoration: none;
-    line-height: 0;
-    transition: border-color $transition, color $transition;
-
-    &:hover {
-        border-color: var(--accent);
-        color: var(--accent);
-    }
-
-    &:focus-visible {
-        outline-offset: 4px;
-    }
-
-    svg {
-        width: 18px;
-        height: 18px;
-        display: block;
-    }
-}
-
 @media (max-width: $bp-md) {
     .hero {
-        min-height: auto;
-        padding-top: calc($nav-height + $space-xl);
-        padding-bottom: $space-2xl;
+        min-height: 100vh;
+        min-height: 100svh;
+        align-items: center;
+        justify-content: center;
+        padding: calc($nav-height + $space-lg) $space-md $space-xl;
     }
 
-    .hero__scroll {
-        display: none;
+    .hero__grid {
+        opacity: 0.25;
+        background-size: 40px 40px;
+    }
+
+    .hero__content {
+        width: 100%;
+        max-width: none;
+    }
+
+    .hero__greeting {
+        font-size: 0.8rem;
+        margin-bottom: $space-sm;
+    }
+
+    .hero__title {
+        font-size: clamp(1.75rem, 9vw, 2.5rem);
+        margin-bottom: $space-md;
+    }
+
+    .hero__tagline {
+        font-size: 1rem;
+        line-height: 1.5;
+        margin-bottom: $space-lg;
+
+        #hero-role {
+            font-weight: 600;
+        }
+    }
+
+    .hero__cta {
+        grid-auto-flow: row;
+        grid-auto-columns: unset;
+        grid-template-columns: 1fr;
+        width: max-content;
+        max-width: 100%;
+        gap: $space-sm;
+        margin-bottom: $space-lg;
+    }
+
+    .hero__social {
+        gap: $space-sm;
+        margin-bottom: 0;
     }
 }
 

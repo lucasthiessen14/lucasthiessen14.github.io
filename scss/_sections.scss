@@ -6,6 +6,10 @@
     gap: $space-2xl;
     align-items: start;
 
+    @media (max-width: $bp-md) {
+        gap: $space-xl;
+    }
+
     @media (min-width: $bp-lg) {
         grid-template-columns: 280px 1fr;
         gap: $space-3xl;
@@ -252,6 +256,27 @@
 }
 
 // Contact
+@media (max-width: $bp-md) {
+    .skills-grid {
+        gap: $space-md;
+    }
+
+    .contact__inner {
+        max-width: none;
+    }
+
+    .contact__form {
+        padding: $space-lg $space-md 0;
+    }
+
+    .contact__direct {
+        margin-left: (-$space-md);
+        margin-right: (-$space-md);
+        padding-left: $space-md;
+        padding-right: $space-md;
+    }
+}
+
 .contact {
     padding: $space-2xl 0;
     background: linear-gradient(180deg, var(--bg-alt) 0%, var(--surface) 100%);

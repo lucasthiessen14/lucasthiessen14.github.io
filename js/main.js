@@ -112,13 +112,6 @@
                 closeNav();
             });
         });
-
-        var toTop = $('#to-top');
-        if (toTop) {
-            toTop.addEventListener('click', function () {
-                scrollToY(0);
-            });
-        }
     }
 
     // --- Mobile nav ---
@@ -207,6 +200,9 @@
         var el = $('#hero-role');
         if (!el || prefersReducedMotion || heroRoles.length < 2) return;
 
+        el.style.opacity = '1';
+        el.style.transition = 'opacity 0.2s ease';
+
         setInterval(function () {
             roleIndex = (roleIndex + 1) % heroRoles.length;
             el.style.opacity = '0';
@@ -215,8 +211,6 @@
                 el.style.opacity = '1';
             }, 200);
         }, 4000);
-
-        el.style.transition = 'opacity 0.2s ease';
     }
 
     // --- Projects toggle (single button) ---

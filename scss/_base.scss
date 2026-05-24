@@ -77,6 +77,21 @@ ul {
     padding: $space-3xl 0;
 }
 
+@media (max-width: $bp-md) {
+    .section {
+        padding: $space-2xl 0;
+    }
+
+    .section__title {
+        margin-bottom: $space-xl;
+        font-size: clamp(1.35rem, 5vw, 1.75rem);
+    }
+
+    .container {
+        padding: 0 $space-md;
+    }
+}
+
 .section--alt {
     background: var(--bg-alt);
 }
