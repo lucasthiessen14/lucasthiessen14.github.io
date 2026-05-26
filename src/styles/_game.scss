@@ -42,16 +42,13 @@
     }
 }
 
-[data-ui='game'] {
+body.game-active {
     .site-main,
     .site-footer--classic,
     .scroll-progress,
     .site-nav__panel {
         display: none !important;
     }
-}
-
-body.game-active {
     overflow: hidden;
 }
 
@@ -146,6 +143,27 @@ body.game-active {
     inset: 0;
     overflow: hidden;
     background: #050508;
+
+    &--pannable {
+        cursor: grab;
+        touch-action: none;
+
+        &.is-panning {
+            cursor: grabbing;
+        }
+    }
+}
+
+.game-mode__loading {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 5;
+    margin: 0;
+    font-family: $font-mono;
+    font-size: 0.875rem;
+    color: var(--text-muted);
 }
 
 .game-mode__maze-world {
@@ -181,27 +199,28 @@ body.game-active {
         opacity: 1;
     }
 
-    &.is-section.is-visible.is-floor {
+    // Unvisited section in vision — soft highlight
+    &.is-section.is-visible.is-floor:not(.is-found):not(.is-visited) {
         background: #354158;
-        box-shadow: inset 0 0 0 1px var(--accent), 0 0 14px var(--accent-glow);
+        box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 40%, transparent),
+            0 0 12px var(--accent-glow);
     }
 
-    &.is-section.is-found.is-floor {
-        box-shadow: inset 0 0 0 1px var(--accent-dim), 0 0 10px var(--accent-glow);
-    }
-
+    // Found or visited — match normal floor (no extra selection ring)
+    &.is-section.is-found.is-floor,
     &.is-section.is-visited.is-floor {
-        background: #354158;
-        box-shadow: inset 0 0 0 1px var(--accent-dim), 0 0 10px var(--accent-glow);
+        background: #3a4558;
+        box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12);
     }
 
-    &.is-section.is-visited.is-visible .game-mode__section-marker,
-    &.is-section.is-visited.is-explored .game-mode__section-marker {
-        opacity: 1;
+    &.is-section.is-found.is-explored .game-mode__section-marker,
+    &.is-section.is-visited.is-explored:not(.is-visible) .game-mode__section-marker {
+        opacity: 0.55;
+        border-color: var(--accent-dim);
     }
 
-    &.is-section.is-found.is-explored .game-mode__section-marker {
-        opacity: 0.75;
+    &.is-section.is-visited.is-visible .game-mode__section-marker {
+        opacity: 0.9;
         border-color: var(--accent-dim);
     }
 
@@ -264,28 +283,27 @@ body.game-active {
     align-items: center;
     justify-content: center;
     box-sizing: border-box;
-    padding: 2px;
+    padding: 3px;
     max-width: calc(100% - 6px);
     max-height: calc(100% - 6px);
     margin: auto;
-    font-family: $font-mono;
-    font-size: clamp(0.375rem, 24cqmin, 0.5rem);
-    font-weight: 600;
-    line-height: 1.1;
-    text-transform: uppercase;
-    letter-spacing: 0.02em;
-    text-align: center;
+    font-size: clamp(0.75rem, 52cqmin, 1.125rem);
+    line-height: 1;
     color: var(--accent);
     border: 1px solid var(--accent);
     border-radius: $radius-sm;
     background: rgba(0, 0, 0, 0.35);
     opacity: 0;
     overflow: hidden;
-    overflow-wrap: anywhere;
-    word-break: break-word;
     pointer-events: none;
     transition: opacity $transition, background $transition, border-color $transition, color $transition;
     z-index: 1;
+}
+
+.game-mode__section-icon {
+    display: block;
+    width: 1em;
+    height: 1em;
 }
 
 .game-mode__section-check {
