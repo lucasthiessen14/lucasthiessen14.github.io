@@ -1,12 +1,14 @@
 var gulp = require('gulp');
 var plumber = require('gulp-plumber');
 const uglify = require('gulp-uglify');
+const concat = require('gulp-concat');
 const sass = require('gulp-sass')(require('sass'));
 const wait = require('gulp-wait');
 const rename = require('gulp-rename');
 
 gulp.task('scripts', function() {
-    return gulp.src('./js/main.js')
+    return gulp.src(['./js/game-mode.js', './js/main.js'])
+        .pipe(concat('main.js'))
         .pipe(plumber({
             errorHandler: function (err) {
                 console.log(err);
@@ -36,6 +38,6 @@ gulp.task('styles', function () {
 gulp.task('build', gulp.parallel('styles', 'scripts'));
 
 gulp.task('watch', function() {
-    gulp.watch('./js/main.js', gulp.series('scripts'));
+    gulp.watch(['./js/game-mode.js', './js/main.js'], gulp.series('scripts'));
     gulp.watch('./scss/**/*.scss', gulp.series('styles'));
 });

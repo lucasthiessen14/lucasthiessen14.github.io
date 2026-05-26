@@ -24,40 +24,6 @@
         return Array.prototype.slice.call((ctx || document).querySelectorAll(sel));
     }
 
-    // --- Theme ---
-    function getSystemTheme() {
-        if (window.matchMedia('(prefers-color-scheme: light)').matches) return 'light';
-        if (window.matchMedia('(prefers-color-scheme: dark)').matches) return 'dark';
-        return 'dark';
-    }
-
-    function applyTheme(theme) {
-        document.documentElement.setAttribute('data-theme', theme);
-    }
-
-    function initTheme() {
-        var toggle = $('#theme-toggle');
-        if (!toggle) return;
-
-        toggle.addEventListener('click', function () {
-            var next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-            applyTheme(next);
-            localStorage.setItem('theme', next);
-        });
-
-        var colorSchemeMq = window.matchMedia('(prefers-color-scheme: light), (prefers-color-scheme: dark)');
-        function onSystemThemeChange() {
-            if (!localStorage.getItem('theme')) {
-                applyTheme(getSystemTheme());
-            }
-        }
-        if (colorSchemeMq.addEventListener) {
-            colorSchemeMq.addEventListener('change', onSystemThemeChange);
-        } else if (colorSchemeMq.addListener) {
-            colorSchemeMq.addListener(onSystemThemeChange);
-        }
-    }
-
     // --- Smooth scroll (easeInOut, capped duration) ---
     function easeInOutQuad(t) {
         return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
@@ -214,11 +180,13 @@
     }
 
     // --- Projects toggle (single button) ---
-    function initProjects() {
-        var more = $('#more-projects');
-        var toggle = $('#projects-toggle');
-        if (!more || !toggle) return;
+    function initProjects(ctx) {
+        var root = ctx || document;
+        var more = root.querySelector('#more-projects') || root.querySelector('.projects__more');
+        var toggle = root.querySelector('#projects-toggle') || root.querySelector('.projects__actions .btn');
+        if (!more || !toggle || toggle.dataset.bound === 'true') return;
 
+        toggle.dataset.bound = 'true';
         toggle.addEventListener('click', function () {
             var opening = more.hidden;
             more.hidden = !opening;
@@ -226,10 +194,10 @@
             toggle.textContent = opening ? 'View Less Projects' : 'View More Projects';
 
             if (opening) {
-                $$('.projects__more .reveal').forEach(function (el) {
+                $$('.projects__more .reveal', root).forEach(function (el) {
                     el.classList.add('is-visible');
                 });
-            } else {
+            } else if (!ctx) {
                 scrollToSelector('#projects');
             }
         });
@@ -246,8 +214,15 @@
         }, 2200);
     }
 
-    function initCopyButtons() {
-        $$('.contact__copy').forEach(function (btn) {
+    function initCopyButtons(ctx) {
+        var root = ctx || document;
+        var buttons = root === document
+            ? $$('.contact__copy')
+            : Array.prototype.slice.call(root.querySelectorAll('.contact__copy'));
+
+        buttons.forEach(function (btn) {
+            if (btn.dataset.bound === 'true') return;
+            btn.dataset.bound = 'true';
             btn.addEventListener('click', function () {
                 var text = btn.getAttribute('data-copy');
                 if (!text) return;
@@ -281,10 +256,12 @@
     }
 
     // --- Contact form (Web3Forms) ---
-    function initContactForm() {
-        var form = $('#contact-form');
-        if (!form) return;
+    function initContactForm(ctx) {
+        var root = ctx || document;
+        var form = root.querySelector('#contact-form') || root.querySelector('.contact__form');
+        if (!form || form.dataset.bound === 'true') return;
 
+        form.dataset.bound = 'true';
         form.addEventListener('submit', function (e) {
             e.preventDefault();
 
@@ -327,6 +304,56 @@
         });
     }
 
+    // --- UI mode (classic / game) ---
+    function applyUiMode(mode) {
+        document.documentElement.setAttribute('data-ui', mode);
+        localStorage.setItem('uiMode', mode);
+
+        var toggle = $('#ui-mode-toggle');
+        if (toggle) {
+            toggle.setAttribute('aria-pressed', mode === 'game' ? 'true' : 'false');
+            toggle.setAttribute('aria-label', mode === 'game' ? 'Switch to classic portfolio' : 'Switch to adventure map');
+        }
+
+        document.dispatchEvent(new CustomEvent('ui-mode-change', { detail: { mode: mode } }));
+    }
+
+    function initUiMode() {
+        var toggle = $('#ui-mode-toggle');
+        if (!toggle) return;
+
+        var stored = localStorage.getItem('uiMode');
+        var initial = stored === 'game' ? 'game' : 'classic';
+        document.documentElement.setAttribute('data-ui', initial);
+        toggle.setAttribute('aria-pressed', initial === 'game' ? 'true' : 'false');
+        toggle.setAttribute('aria-label', initial === 'game' ? 'Switch to classic portfolio' : 'Switch to adventure map');
+
+        toggle.addEventListener('click', function () {
+            var next = document.documentElement.getAttribute('data-ui') === 'game' ? 'classic' : 'game';
+            applyUiMode(next);
+        });
+
+        if (initial === 'game') {
+            document.dispatchEvent(new CustomEvent('ui-mode-change', { detail: { mode: 'game' } }));
+        }
+    }
+
+    function initPanelHooks(ctx) {
+        if (!ctx) return;
+        $$('.reveal', ctx).forEach(function (el) {
+            el.classList.add('is-visible');
+        });
+        initProjects(ctx);
+        initCopyButtons(ctx);
+        initContactForm(ctx);
+    }
+
+    window.Portfolio = {
+        setUiMode: applyUiMode,
+        initPanelHooks: initPanelHooks,
+        showToast: showToast
+    };
+
     // --- Footer year + age ---
     function initDates() {
         var y = new Date().getFullYear();
@@ -337,7 +364,7 @@
     }
 
     function init() {
-        initTheme();
+        initUiMode();
         initScrollLinks();
         initNav();
         initScrollSpy();

@@ -78,42 +78,6 @@
     gap: $space-sm;
 }
 
-.theme-toggle {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    padding: 0;
-    border: 1px solid var(--border);
-    border-radius: $radius-sm;
-    background: var(--surface);
-    color: var(--text);
-    cursor: pointer;
-    transition: border-color $transition, background $transition;
-
-    &:hover {
-        border-color: var(--accent);
-        color: var(--accent);
-    }
-
-    svg {
-        width: 18px;
-        height: 18px;
-    }
-
-    .icon-sun { display: none; }
-    .icon-moon { display: block; }
-}
-
-[data-theme='light'] .theme-toggle .icon-sun {
-    display: block;
-}
-
-[data-theme='light'] .theme-toggle .icon-moon {
-    display: none;
-}
-
 .nav-toggle {
     display: none;
     align-items: center;

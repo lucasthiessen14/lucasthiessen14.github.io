@@ -476,7 +476,10 @@
     font-size: 0.8125rem;
     font-weight: 500;
     color: var(--heading);
-    word-break: break-word;
+    white-space: nowrap;
+    word-break: normal;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
 
     &:hover {
         color: var(--accent);

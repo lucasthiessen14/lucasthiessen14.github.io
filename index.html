@@ -20,13 +20,8 @@
     <link href="/css/styles.css" rel="stylesheet">
     <script>
         (function () {
-            function getSystemTheme() {
-                if (window.matchMedia('(prefers-color-scheme: light)').matches) return 'light';
-                if (window.matchMedia('(prefers-color-scheme: dark)').matches) return 'dark';
-                return 'dark';
-            }
-            var stored = localStorage.getItem('theme');
-            document.documentElement.setAttribute('data-theme', stored || getSystemTheme());
+            document.documentElement.setAttribute('data-theme', 'dark');
+            document.documentElement.setAttribute('data-ui', localStorage.getItem('uiMode') === 'game' ? 'game' : 'classic');
         })();
     </script>
 </head>
@@ -48,9 +43,9 @@
                 </ul>
             </div>
             <div class="site-nav__actions">
-                <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Toggle light and dark theme">
-                    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-                    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+                <button type="button" class="ui-mode-toggle" id="ui-mode-toggle" aria-pressed="false" aria-label="Switch to adventure map">
+                    <svg class="icon-map" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 6l6-2 6 2 6-2v14l-6 2-6-2-6 2V6z"/><path d="M9 4v14M15 6v14"/></svg>
+                    <svg class="icon-doc" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>
                 </button>
                 <button type="button" class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-panel" aria-label="Open menu">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
@@ -59,7 +54,7 @@
         </div>
     </nav>
 
-    <main>
+    <main class="site-main">
         <section class="hero" id="hero">
             <div class="hero__bg" aria-hidden="true"></div>
             <div class="hero__grid" aria-hidden="true"></div>
@@ -68,7 +63,7 @@
                 <h1 class="hero__title">Lucas Thiessen</h1>
                 <p class="hero__tagline"><span id="hero-role">Computer Engineering Graduate</span></p>
                 <div class="hero__cta">
-                    <a href="files/Resume.pdf" class="btn btn--primary">Download Resume</a>
+                    <a href="files/Resume.pdf" class="btn btn--primary" target="_blank" rel="noopener noreferrer">Download Resume</a>
                     <a href="#contact" class="btn btn--ghost" data-scroll>Get in Touch</a>
                 </div>
                 <ul class="hero__social">
@@ -396,7 +391,48 @@
         </section>
     </main>
 
-    <footer class="site-footer">
+    <div class="game-mode" id="game-mode" hidden aria-hidden="true">
+        <div class="game-mode__hud" id="game-hud">
+            <div class="game-mode__hud-left">
+                <h2 class="game-mode__title">Lucas's World</h2>
+                <p class="game-mode__progress" id="game-progress" aria-live="polite">0 / 7 discovered</p>
+            </div>
+            <p class="game-mode__hint">WASD or arrows to explore · Enter on a section to open</p>
+            <button type="button" class="btn btn--ghost game-mode__exit" id="game-exit">Exit to Classic</button>
+        </div>
+        <div class="game-mode__viewport" id="game-viewport" tabindex="0" aria-label="Resume maze — use arrow keys or WASD to move">
+            <div class="game-mode__map-wrap" id="game-map-wrap">
+                <div class="game-mode__maze-world" id="game-maze-world">
+                    <div class="game-mode__maze" id="game-maze" role="img" aria-label="Maze map"></div>
+                </div>
+                <div class="game-mode__avatar" id="game-avatar" aria-hidden="true"></div>
+            </div>
+            <div class="game-mode__prompt" id="game-section-prompt" hidden>
+                <p class="game-mode__prompt-text" id="game-prompt-text"></p>
+                <button type="button" class="btn btn--primary game-mode__prompt-btn" id="game-prompt-open">Open section</button>
+            </div>
+            <div class="game-mode__dpad" id="game-dpad" aria-label="Movement controls">
+                <button type="button" class="game-mode__dpad-btn" data-move="up" aria-label="Move up">↑</button>
+                <button type="button" class="game-mode__dpad-btn" data-move="left" aria-label="Move left">←</button>
+                <button type="button" class="game-mode__dpad-btn" data-move="down" aria-label="Move down">↓</button>
+                <button type="button" class="game-mode__dpad-btn" data-move="right" aria-label="Move right">→</button>
+            </div>
+        </div>
+        <div class="game-mode__modal" id="game-modal" hidden>
+            <div class="game-mode__modal-backdrop" id="game-modal-backdrop" aria-hidden="true"></div>
+            <div class="game-mode__modal-dialog" role="dialog" aria-modal="true" aria-labelledby="game-modal-title">
+                <div class="game-mode__modal-header">
+                    <h3 class="game-mode__modal-title" id="game-modal-title"></h3>
+                    <button type="button" class="game-mode__modal-close" id="game-modal-close" aria-label="Close modal">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"/></svg>
+                    </button>
+                </div>
+                <div class="game-mode__modal-body" id="game-modal-body"></div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="site-footer site-footer--classic">
         <div class="site-footer__inner">
             <p class="site-footer__copy">© <span id="copyright-year"></span> Lucas Thiessen</p>
             <ul class="site-footer__social">
