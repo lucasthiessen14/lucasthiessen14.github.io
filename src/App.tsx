@@ -1,3 +1,4 @@
+import { GAME_MODE_ENABLED } from './config/features';
 import { useUiMode } from './context/UiModeContext';
 import { useReveal } from './hooks/useReveal';
 import { useScrollSpy } from './hooks/useScrollSpy';
@@ -16,7 +17,7 @@ export function App() {
       <div className="scroll-progress" id="scroll-progress" aria-hidden="true" />
       <Nav />
       {mode === 'classic' && <ClassicSite />}
-      <GameMode />
+      {GAME_MODE_ENABLED && <GameMode />}
       {mode === 'classic' && <Footer />}
     </>
   );

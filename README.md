@@ -11,6 +11,16 @@ npm run dev
 
 Opens the Vite dev server with hot reload for React, TypeScript, and SCSS.
 
+The adventure map (game mode) is **enabled in local dev** via `.env.development` and **disabled in production builds** until you turn it on.
+
+To test game mode against a production build locally:
+
+```bash
+VITE_ENABLE_GAME_MODE=true npm run build && npm run preview
+```
+
+To ship game mode to the live site, set `VITE_ENABLE_GAME_MODE=true` in the GitHub Actions build (or add it to a committed `.env.production` when ready).
+
 ## Build
 
 ```bash

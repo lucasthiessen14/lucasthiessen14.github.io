@@ -7,12 +7,14 @@ import {
   useState,
   type ReactNode,
 } from 'react';
+import { GAME_MODE_ENABLED } from '../config/features';
 import type { UiMode } from '../types/sections';
 
 type UiModeContextValue = {
   mode: UiMode;
   setMode: (mode: UiMode) => void;
   toggleMode: () => void;
+  gameModeEnabled: boolean;
 };
 
 const UiModeContext = createContext<UiModeContextValue | null>(null);
@@ -27,6 +29,12 @@ export function UiModeProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', 'dark');
+    if (!GAME_MODE_ENABLED) {
+      if (readStoredMode() === 'game') {
+        localStorage.setItem('uiMode', 'classic');
+      }
+      return;
+    }
     const stored = readStoredMode();
     if (stored === 'game') {
       setModeState('game');
@@ -34,12 +42,14 @@ export function UiModeProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const setMode = useCallback((next: UiMode) => {
-    setModeState(next);
-    document.documentElement.setAttribute('data-ui', next);
-    localStorage.setItem('uiMode', next);
+    const resolved = next === 'game' && !GAME_MODE_ENABLED ? 'classic' : next;
+    setModeState(resolved);
+    document.documentElement.setAttribute('data-ui', resolved);
+    localStorage.setItem('uiMode', resolved);
   }, []);
 
   const toggleMode = useCallback(() => {
+    if (!GAME_MODE_ENABLED) return;
     setMode(mode === 'game' ? 'classic' : 'game');
   }, [mode, setMode]);
 
@@ -49,7 +59,7 @@ export function UiModeProvider({ children }: { children: ReactNode }) {
   }, [mode]);
 
   const value = useMemo(
-    () => ({ mode, setMode, toggleMode }),
+    () => ({ mode, setMode, toggleMode, gameModeEnabled: GAME_MODE_ENABLED }),
     [mode, setMode, toggleMode],
   );
 

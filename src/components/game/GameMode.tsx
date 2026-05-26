@@ -70,6 +70,7 @@ export function GameMode() {
   const panRef = useRef(panOffset);
   panRef.current = panOffset;
   const isPanningRef = useRef(false);
+  const wheelPanEndRef = useRef<number | null>(null);
   const panDragRef = useRef<{
     pointerId: number;
     startX: number;
@@ -118,8 +119,8 @@ export function GameMode() {
     world.style.transition = 'none';
     const cam = getCameraWithPan(maze, playerRef.current, viewportRef.current, panRef.current);
     world.style.transform = `translate(${cam.offsetX}px, ${cam.offsetY}px)`;
-    avatar.style.left = `${cam.offsetX + cam.playerX}px`;
-    avatar.style.top = `${cam.offsetY + cam.playerY}px`;
+    avatar.style.left = `${cam.playerX}px`;
+    avatar.style.top = `${cam.playerY}px`;
     requestAnimationFrame(() => {
       avatar.style.transition = '';
       world.style.transition = '';
@@ -149,13 +150,23 @@ export function GameMode() {
       avatar.style.transition = 'none';
     }
     world.style.transform = `translate(${cam.offsetX}px, ${cam.offsetY}px)`;
-    avatar.style.left = `${cam.offsetX + cam.playerX}px`;
-    avatar.style.top = `${cam.offsetY + cam.playerY}px`;
+    avatar.style.left = `${cam.playerX}px`;
+    avatar.style.top = `${cam.playerY}px`;
   }, []);
 
-  const applyPanDelta = useCallback((dx: number, dy: number) => {
-    setPanOffset((prev) => ({ x: prev.x + dx, y: prev.y + dy }));
+  const disablePanTransitions = useCallback(() => {
+    if (!mazeWorldRef.current || !avatarRef.current) return;
+    mazeWorldRef.current.style.transition = 'none';
+    avatarRef.current.style.transition = 'none';
   }, []);
+
+  const applyPan = useCallback(
+    (nextPan: PanOffset) => {
+      positionView(playerRef.current, maze, nextPan);
+      setPanOffset({ ...panRef.current });
+    },
+    [maze, positionView],
+  );
 
   const tryMove = useCallback(
     (dr: number, dc: number): boolean => {
@@ -278,12 +289,29 @@ export function GameMode() {
     const onWheel = (e: WheelEvent) => {
       if (modalOpen) return;
       e.preventDefault();
-      applyPanDelta(-e.deltaX, -e.deltaY);
+      disablePanTransitions();
+      applyPan({
+        x: panRef.current.x - e.deltaX,
+        y: panRef.current.y - e.deltaY,
+      });
+      if (wheelPanEndRef.current !== null) {
+        window.clearTimeout(wheelPanEndRef.current);
+      }
+      wheelPanEndRef.current = window.setTimeout(() => {
+        wheelPanEndRef.current = null;
+        if (mazeWorldRef.current) mazeWorldRef.current.style.transition = '';
+        if (avatarRef.current) avatarRef.current.style.transition = '';
+      }, 120);
     };
 
     el.addEventListener('wheel', onWheel, { passive: false });
-    return () => el.removeEventListener('wheel', onWheel);
-  }, [mode, modalOpen, applyPanDelta]);
+    return () => {
+      el.removeEventListener('wheel', onWheel);
+      if (wheelPanEndRef.current !== null) {
+        window.clearTimeout(wheelPanEndRef.current);
+      }
+    };
+  }, [mode, modalOpen, applyPan, disablePanTransitions]);
 
   const onMapPointerDown = (e: ReactPointerEvent<HTMLDivElement>) => {
     if (modalOpen || e.button !== 0) return;
@@ -306,9 +334,8 @@ export function GameMode() {
     if (!drag || drag.pointerId !== e.pointerId) return;
     const dx = e.clientX - drag.startX;
     const dy = e.clientY - drag.startY;
-    const next = { x: drag.panX + dx, y: drag.panY + dy };
-    positionView(playerRef.current, maze, next);
-    setPanOffset(panRef.current);
+    disablePanTransitions();
+    applyPan({ x: drag.panX + dx, y: drag.panY + dy });
   };
 
   const endMapPan = (target: HTMLDivElement, pointerId: number) => {
@@ -531,8 +558,8 @@ export function GameMode() {
                 );
               })}
             </div>
+            <div className="game-mode__avatar" ref={avatarRef} aria-hidden />
           </div>
-          <div className="game-mode__avatar" ref={avatarRef} aria-hidden />
         </div>
 
         {pendingSectionId && !modalOpen && (

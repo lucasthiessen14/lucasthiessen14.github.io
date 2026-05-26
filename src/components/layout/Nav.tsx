@@ -15,7 +15,7 @@ const NAV_LINKS = [
 ];
 
 export function Nav() {
-  const { mode, toggleMode } = useUiMode();
+  const { mode, toggleMode, gameModeEnabled } = useUiMode();
 
   const closeNav = () => {
     document.body.classList.remove('nav-open');
@@ -58,19 +58,21 @@ export function Nav() {
           </ul>
         </div>
         <div className="site-nav__actions">
-          <button
-            type="button"
-            className="ui-mode-toggle"
-            id="ui-mode-toggle"
-            aria-pressed={mode === 'game'}
-            aria-label={
-              mode === 'game' ? 'Switch to classic portfolio' : 'Switch to adventure map'
-            }
-            onClick={toggleMode}
-          >
-            <MapIcon className="icon-map" aria-hidden />
-            <DescriptionIcon className="icon-doc" aria-hidden />
-          </button>
+          {gameModeEnabled && (
+            <button
+              type="button"
+              className="ui-mode-toggle"
+              id="ui-mode-toggle"
+              aria-pressed={mode === 'game'}
+              aria-label={
+                mode === 'game' ? 'Switch to classic portfolio' : 'Switch to adventure map'
+              }
+              onClick={toggleMode}
+            >
+              <MapIcon className="icon-map" aria-hidden />
+              <DescriptionIcon className="icon-doc" aria-hidden />
+            </button>
+          )}
           <button
             type="button"
             className="nav-toggle"
