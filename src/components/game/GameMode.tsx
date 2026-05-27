@@ -468,11 +468,23 @@ export function GameMode() {
     }
   }
 
+  const mazePixelW = cols * CELL_SIZE;
+  const mazePixelH = rows * CELL_SIZE;
+
+  const mazeWorldStyle: CSSProperties = {
+    ['--game-cell-size' as string]: `${CELL_SIZE}px`,
+  };
+
   const mazeStyle: CSSProperties = {
     gridTemplateColumns: `repeat(${cols}, ${CELL_SIZE}px)`,
     gridTemplateRows: `repeat(${rows}, ${CELL_SIZE}px)`,
-    width: cols * CELL_SIZE,
-    height: rows * CELL_SIZE,
+    width: mazePixelW,
+    height: mazePixelH,
+  };
+
+  const mapGridStyle: CSSProperties = {
+    width: mazePixelW,
+    height: mazePixelH,
   };
 
   return (
@@ -511,7 +523,8 @@ export function GameMode() {
               Generating map…
             </p>
           )}
-          <div className="game-mode__maze-world" ref={mazeWorldRef}>
+          <div className="game-mode__maze-world" ref={mazeWorldRef} style={mazeWorldStyle}>
+            <div className="game-mode__map-grid" style={mapGridStyle} aria-hidden />
             <div className="game-mode__maze" style={mazeStyle} role="img" aria-label="Maze map">
               {cells.map(({ row, col, sectionId }) => {
                 const key = cellKey(row, col);

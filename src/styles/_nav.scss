@@ -78,6 +78,32 @@
     gap: $space-sm;
 }
 
+.nav-icon-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border: 1px solid var(--border);
+    border-radius: $radius-sm;
+    background: var(--surface);
+    color: var(--heading);
+    cursor: pointer;
+    transition: border-color $transition, background $transition, color $transition, box-shadow $transition;
+
+    &:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+        box-shadow: 0 0 0 1px var(--accent-glow);
+    }
+
+    svg {
+        width: 20px;
+        height: 20px;
+    }
+}
+
 .nav-toggle {
     display: none;
     align-items: center;

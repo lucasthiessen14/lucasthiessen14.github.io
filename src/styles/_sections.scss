@@ -41,7 +41,7 @@
     border-radius: $radius-sm;
     background: var(--surface);
     border: 1px solid var(--border);
-    color: var(--text-muted);
+    color: var(--text);
 }
 
 .about__text {
@@ -67,7 +67,7 @@
 
     &:hover {
         border-color: var(--accent);
-        box-shadow: 0 0 0 1px var(--accent-glow);
+        box-shadow: 0 0 0 1px var(--accent-glow), var(--shadow);
     }
 }
 

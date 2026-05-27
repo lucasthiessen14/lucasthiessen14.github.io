@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { App } from './App';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { ToastProvider } from './context/ToastContext';
+import { ThemeProvider } from './context/ThemeContext';
 import { UiModeProvider } from './context/UiModeContext';
 import './styles/styles.scss';
 
@@ -14,11 +15,13 @@ if (!rootEl) {
 createRoot(rootEl).render(
   <StrictMode>
     <ErrorBoundary>
-      <UiModeProvider>
-        <ToastProvider>
-          <App />
-        </ToastProvider>
-      </UiModeProvider>
+      <ThemeProvider>
+        <UiModeProvider>
+          <ToastProvider>
+            <App />
+          </ToastProvider>
+        </UiModeProvider>
+      </ThemeProvider>
     </ErrorBoundary>
   </StrictMode>,
 );

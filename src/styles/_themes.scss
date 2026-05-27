@@ -1,20 +1,202 @@
+// Shared tokens (theme-agnostic)
 :root {
+    --accent-glow-strong: color-mix(in srgb, var(--accent) 40%, transparent);
+}
+
+[data-theme='dark'] {
     color-scheme: dark;
-    --bg: #0b0f14;
-    --bg-elevated: #121820;
-    --bg-alt: #0f141c;
-    --surface: #161d27;
-    --surface-hover: #1c2533;
-    --border: #30445c;
-    --text: #d6e2f0;
-    --text-muted: #94a8c0;
-    --heading: #f8fafc;
-    --accent: #38e0f5;
-    --accent-dim: #0891b2;
-    --accent-glow: rgba(34, 211, 238, 0.25);
-    --hero-mesh-1: rgba(34, 211, 238, 0.1);
-    --hero-mesh-2: rgba(99, 102, 241, 0.08);
-    --nav-bg: rgba(11, 15, 20, 0.82);
-    --shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+
+    --hero-bg: #080c11;
+    --hero-fade-height: 0px;
+    --bg: #080c11;
+    --bg-elevated: #10161f;
+    --bg-alt: #0c1118;
+    --surface: #141c28;
+    --surface-hover: #1a2433;
+    --border: #3f5872;
+    --text: #eaf1fa;
+    --text-muted: #a8bdd4;
+    --heading: #ffffff;
+    --accent: #45e8ff;
+    --accent-dim: #22bfd9;
+    --accent-glow: rgba(69, 232, 255, 0.28);
+    --on-accent: #061018;
+    --hero-mesh-1: rgba(69, 232, 255, 0.26);
+    --hero-mesh-2: rgba(129, 140, 248, 0.2);
+    --nav-bg: rgba(8, 12, 17, 0.9);
+    --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
     --progress-bg: var(--border);
+
+    --hero-text: #e8f1fb;
+    --hero-heading: #ffffff;
+    --hero-accent: #5ce9ff;
+    --hero-border: #4d6785;
+    --hero-surface: rgba(14, 20, 30, 0.92);
+    --hero-surface-hover: rgba(18, 26, 38, 0.96);
+    --hero-grid-line: rgba(255, 255, 255, 0.24);
+    --hero-grid-opacity: 0.72;
+    --hero-scrim-center: rgba(4, 7, 11, 0.52);
+    --hero-scrim-bottom: rgba(4, 7, 11, 0.32);
+    --hero-content-glow: rgba(4, 7, 11, 0.42);
+    --hero-title-from: #ffffff;
+    --hero-title-to: #a5f3fc;
+    --hero-text-shadow: 0 1px 12px rgba(0, 0, 0, 0.55);
+    --hero-title-shadow: 0 2px 18px rgba(0, 0, 0, 0.5);
+
+    --game-map-bg: #050508;
+    --game-fog-hidden: #050508;
+    --game-fog-explored: #12141c;
+    --game-fog-explored-wall: #181b24;
+    /* Plain explored path — keep darker so landmarks read clearly */
+    --game-path-explored: #1a2838;
+    --game-path-visited: #243548;
+    --game-wall: #3a4050;
+    --game-floor: #2a3140;
+    /* Destinations: lighter / more cyan than path + normal lit floor */
+    --game-floor-section: #4d6d8c;
+    --game-floor-found: #3d5c78;
+    --game-floor-visited: #2d4a62;
+    --game-section-explored: #3a5c78;
+    --game-section-explored-visited: #4a6f8c;
+    --game-wall-visible: #4a5368;
+    --game-floor-visible: #323d4f;
+    --game-cell-inset: rgba(255, 255, 255, 0.12);
+    --game-cell-inset-subtle: rgba(255, 255, 255, 0.08);
+    --game-marker-bg: rgba(0, 0, 0, 0.35);
+    --game-cell-border: transparent;
+    --game-cell-border-faint: transparent;
+    --game-marker-shadow: none;
+    --game-avatar-ring: var(--heading);
+    --game-modal-backdrop: rgba(0, 0, 0, 0.72);
+    --game-overlay-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+    --game-modal-shadow: 0 24px 64px rgba(0, 0, 0, 0.45);
+}
+
+[data-theme='light'] {
+    color-scheme: light;
+
+    --hero-bg: #f6f9fc;
+    --bg: #eef2f6;
+    --bg-elevated: #ffffff;
+    --bg-alt: #e6ecf2;
+    --surface: #ffffff;
+    --surface-hover: #eef3f8;
+    --border: #7a92a8;
+    --text: #0b1522;
+    --text-muted: #2a3f56;
+    --heading: #030a12;
+    --accent: #056b82;
+    --accent-dim: #045568;
+    --accent-glow: rgba(5, 107, 130, 0.28);
+    --on-accent: #f8fcfd;
+    --hero-mesh-1: rgba(5, 107, 130, 0.24);
+    --hero-mesh-2: rgba(67, 56, 202, 0.16);
+    --nav-bg: rgba(255, 255, 255, 0.94);
+    --shadow: 0 12px 40px rgba(8, 22, 42, 0.14);
+    --progress-bg: #8fa3b8;
+
+    --hero-text: #0b1522;
+    --hero-heading: #030a12;
+    --hero-accent: #056b82;
+    --hero-border: #6a839c;
+    --hero-surface: rgba(255, 255, 255, 0.97);
+    --hero-surface-hover: #ffffff;
+    --hero-grid-line: rgba(8, 22, 42, 0.18);
+    --hero-grid-opacity: 0.78;
+    --hero-scrim-center: rgba(255, 255, 255, 0.45);
+    --hero-scrim-bottom: transparent;
+    --hero-content-glow: rgba(255, 255, 255, 0.75);
+    --hero-fade-height: 9rem;
+    --hero-title-from: #030a12;
+    --hero-title-to: #056b82;
+    --hero-text-shadow: none;
+    --hero-title-shadow: 0 2px 14px rgba(8, 22, 42, 0.16);
+
+    --game-map-bg: #d8e2ec;
+    --game-viewport-grid-line: rgba(15, 35, 60, 0.2);
+    --game-fog-hidden: #ccd6e2;
+    --game-fog-explored: #c5d0dc;
+    --game-fog-explored-wall: #9aaab8;
+    --game-path-explored: #9ed0e8;
+    --game-path-visited: #7ec0dc;
+    --game-wall: #8a9eb0;
+    --game-floor: #94a7ba;
+    --game-floor-section: #4a6880;
+    --game-floor-found: #6a90a8;
+    --game-floor-visited: #7ec0dc;
+    --game-wall-visible: #2a4558;
+    --game-floor-visible: #4a7894;
+    --game-cell-border: rgba(15, 35, 60, 0.28);
+    --game-cell-border-faint: rgba(15, 35, 60, 0.14);
+    --game-cell-inset: rgba(255, 255, 255, 0.45);
+    --game-cell-inset-subtle: rgba(15, 35, 60, 0.18);
+    --game-marker-bg: #ffffff;
+    --game-marker-shadow: 0 2px 8px rgba(8, 22, 42, 0.2);
+    --game-avatar-ring: #ffffff;
+    --game-modal-backdrop: rgba(15, 35, 60, 0.42);
+    --game-overlay-shadow: var(--shadow);
+    --game-modal-shadow: 0 20px 50px rgba(8, 22, 42, 0.16);
+}
+
+// Default before React hydrates (inline script sets data-theme)
+:root:not([data-theme]) {
+    color-scheme: dark;
+    --bg: #080c11;
+    --bg-elevated: #10161f;
+    --bg-alt: #0c1118;
+    --surface: #141c28;
+    --surface-hover: #1a2433;
+    --border: #3f5872;
+    --text: #eaf1fa;
+    --text-muted: #a8bdd4;
+    --heading: #ffffff;
+    --accent: #45e8ff;
+    --accent-dim: #22bfd9;
+    --accent-glow: rgba(69, 232, 255, 0.28);
+    --on-accent: #061018;
+    --hero-mesh-1: rgba(69, 232, 255, 0.26);
+    --hero-mesh-2: rgba(129, 140, 248, 0.2);
+    --nav-bg: rgba(8, 12, 17, 0.9);
+    --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    --progress-bg: var(--border);
+    --hero-text: #e8f1fb;
+    --hero-heading: #ffffff;
+    --hero-accent: #5ce9ff;
+    --hero-border: #4d6785;
+    --hero-surface: rgba(14, 20, 30, 0.92);
+    --hero-surface-hover: rgba(18, 26, 38, 0.96);
+    --hero-grid-line: rgba(255, 255, 255, 0.24);
+    --hero-grid-opacity: 0.72;
+    --hero-scrim-center: rgba(4, 7, 11, 0.52);
+    --hero-scrim-bottom: rgba(4, 7, 11, 0.32);
+    --hero-content-glow: rgba(4, 7, 11, 0.42);
+    --hero-title-from: #ffffff;
+    --hero-title-to: #a5f3fc;
+    --hero-text-shadow: 0 1px 12px rgba(0, 0, 0, 0.55);
+    --hero-title-shadow: 0 2px 18px rgba(0, 0, 0, 0.5);
+    --game-map-bg: #050508;
+    --game-fog-hidden: #050508;
+    --game-fog-explored: #12141c;
+    --game-fog-explored-wall: #181b24;
+    --game-path-explored: #1a2838;
+    --game-path-visited: #243548;
+    --game-wall: #3a4050;
+    --game-floor: #2a3140;
+    --game-floor-section: #4d6d8c;
+    --game-floor-found: #3d5c78;
+    --game-floor-visited: #2d4a62;
+    --game-section-explored: #3a5c78;
+    --game-section-explored-visited: #4a6f8c;
+    --game-wall-visible: #4a5368;
+    --game-floor-visible: #323d4f;
+    --game-cell-inset: rgba(255, 255, 255, 0.12);
+    --game-cell-inset-subtle: rgba(255, 255, 255, 0.08);
+    --game-marker-bg: rgba(0, 0, 0, 0.35);
+    --game-cell-border: transparent;
+    --game-cell-border-faint: transparent;
+    --game-marker-shadow: none;
+    --game-avatar-ring: var(--heading);
+    --game-modal-backdrop: rgba(0, 0, 0, 0.72);
+    --game-overlay-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+    --game-modal-shadow: 0 24px 64px rgba(0, 0, 0, 0.45);
 }

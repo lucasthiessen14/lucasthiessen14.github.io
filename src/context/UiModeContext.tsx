@@ -28,7 +28,6 @@ export function UiModeProvider({ children }: { children: ReactNode }) {
   const [mode, setModeState] = useState<UiMode>('classic');
 
   useEffect(() => {
-    document.documentElement.setAttribute('data-theme', 'dark');
     if (!GAME_MODE_ENABLED) {
       if (readStoredMode() === 'game') {
         localStorage.setItem('uiMode', 'classic');

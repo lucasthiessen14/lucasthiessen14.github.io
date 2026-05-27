@@ -26,7 +26,10 @@
       rel="stylesheet"
     />
     <script>
-      document.documentElement.setAttribute('data-theme', 'dark');
+      (function () {
+        var t = localStorage.getItem('colorTheme');
+        document.documentElement.setAttribute('data-theme', t === 'light' ? 'light' : 'dark');
+      })();
     </script>
   </head>
   <body>

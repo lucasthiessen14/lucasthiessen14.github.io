@@ -1,7 +1,10 @@
 import type { MouseEvent } from 'react';
 import MapIcon from '@mui/icons-material/Map';
 import DescriptionIcon from '@mui/icons-material/Description';
+import DarkModeIcon from '@mui/icons-material/DarkMode';
+import LightModeIcon from '@mui/icons-material/LightMode';
 import MenuIcon from '@mui/icons-material/Menu';
+import { useTheme } from '../../context/ThemeContext';
 import { useUiMode } from '../../context/UiModeContext';
 import { scrollToSelector } from '../../utils/scroll';
 
@@ -15,6 +18,7 @@ const NAV_LINKS = [
 ];
 
 export function Nav() {
+  const { theme, toggleTheme } = useTheme();
   const { mode, toggleMode, gameModeEnabled } = useUiMode();
 
   const closeNav = () => {
@@ -58,10 +62,23 @@ export function Nav() {
           </ul>
         </div>
         <div className="site-nav__actions">
+          <button
+            type="button"
+            className="nav-icon-btn theme-toggle"
+            id="theme-toggle"
+            aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+            onClick={toggleTheme}
+          >
+            {theme === 'dark' ? (
+              <LightModeIcon aria-hidden />
+            ) : (
+              <DarkModeIcon aria-hidden />
+            )}
+          </button>
           {gameModeEnabled && (
             <button
               type="button"
-              className="ui-mode-toggle"
+              className="nav-icon-btn ui-mode-toggle"
               id="ui-mode-toggle"
               aria-pressed={mode === 'game'}
               aria-label={
