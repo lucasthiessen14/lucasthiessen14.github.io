@@ -9,12 +9,16 @@ export function useScrollSpy(): void {
       document.querySelectorAll<HTMLAnchorElement>('.site-nav__link[data-nav]'),
     );
     const sections = NAV_SECTIONS.map((id) => document.getElementById(id)).filter(Boolean);
+    let rafId: number | null = null;
+    let lastScrollTop = 0;
 
-    function onScroll() {
-      const scrollTop = window.pageYOffset;
+    function update() {
+      rafId = null;
+      const scrollTop = lastScrollTop;
       const docHeight = document.documentElement.scrollHeight - window.innerHeight;
       if (progress && docHeight > 0) {
-        progress.style.width = `${(scrollTop / docHeight) * 100}%`;
+        const ratio = Math.min(1, Math.max(0, scrollTop / docHeight));
+        progress.style.transform = `scaleX(${ratio})`;
       }
 
       let current: string | null = null;
@@ -31,8 +35,17 @@ export function useScrollSpy(): void {
       });
     }
 
+    function onScroll() {
+      lastScrollTop = window.scrollY || window.pageYOffset;
+      if (rafId !== null) return;
+      rafId = window.requestAnimationFrame(update);
+    }
+
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
-    return () => window.removeEventListener('scroll', onScroll);
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      if (rafId !== null) window.cancelAnimationFrame(rafId);
+    };
   }, []);
 }
