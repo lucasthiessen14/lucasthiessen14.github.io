@@ -54,48 +54,87 @@
     display: flex;
     flex-direction: column;
     gap: $space-lg;
-    max-width: 800px;
+    max-width: 860px;
     margin: 0 auto;
+    position: relative;
+
+    @media (min-width: $bp-md) {
+        gap: $space-xl;
+    }
 }
 
 .experience-card {
+    position: relative;
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: $radius-lg;
     padding: $space-lg;
-    transition: border-color $transition, box-shadow $transition;
+    box-shadow: 0 10px 30px color-mix(in srgb, var(--shadow) 55%, transparent);
+    transition: border-color $transition, box-shadow $transition, transform $transition;
+    overflow: hidden;
+
+    &::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 3px;
+        background: linear-gradient(
+            180deg,
+            color-mix(in srgb, var(--accent) 85%, var(--border)),
+            color-mix(in srgb, var(--accent) 30%, var(--border))
+        );
+        opacity: 0.9;
+    }
+
+    @media (min-width: $bp-md) {
+        padding: $space-xl;
+    }
 
     &:hover {
-        border-color: var(--accent);
-        box-shadow: 0 0 0 1px var(--accent-glow), var(--shadow);
+        border-color: color-mix(in srgb, var(--accent) 45%, var(--border));
+        box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent) 16%, transparent), 0 16px 42px color-mix(in srgb, var(--shadow) 70%, transparent);
+        transform: translateY(-1px);
     }
 }
 
 .experience-card__date {
     font-family: $font-mono;
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     font-weight: 600;
-    color: var(--accent);
-    margin-bottom: $space-sm;
-    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--accent-dim);
+    margin-bottom: $space-xs;
+    padding: 0.2rem 0.55rem;
+    width: fit-content;
+    border-radius: $radius-sm;
+    background: color-mix(in srgb, var(--accent) 12%, var(--surface));
+    border: 1px solid color-mix(in srgb, var(--accent) 22%, var(--border));
 }
 
 .experience-card__company {
-    font-size: 1.2rem;
+    font-size: 1.25rem;
     font-weight: 700;
+    color: var(--heading);
     margin-bottom: $space-xs;
+    letter-spacing: -0.02em;
+    line-height: 1.25;
 }
 
 .experience-card__role {
     font-size: 0.95rem;
-    font-weight: 500;
+    font-weight: 600;
     color: var(--text-muted);
     margin-bottom: $space-md;
 }
 
 .experience-card__bullets {
     list-style: none;
-    padding: 0;
+    padding: $space-sm 0 0;
+    margin: 0;
+    border-top: 1px solid color-mix(in srgb, var(--border) 70%, transparent);
 
     li {
         position: relative;
@@ -103,7 +142,7 @@
         margin-bottom: $space-sm;
         font-size: 0.9rem;
         color: var(--text);
-        line-height: 1.55;
+        line-height: 1.6;
 
         &::before {
             content: '▹';
@@ -521,4 +560,10 @@
     border: 0;
     padding: 0;
     margin: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .experience-card:hover {
+        transform: none;
+    }
 }
