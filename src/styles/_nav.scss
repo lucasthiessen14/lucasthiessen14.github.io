@@ -22,9 +22,9 @@
     height: $nav-height;
     z-index: 1000;
     background: var(--nav-bg);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border);
+    backdrop-filter: blur(16px) saturate(1.2);
+    -webkit-backdrop-filter: blur(16px) saturate(1.2);
+    border-bottom: 1px solid color-mix(in srgb, var(--border) 70%, transparent);
 }
 
 .site-nav__inner {
@@ -38,13 +38,51 @@
 }
 
 .site-nav__logo {
+    display: inline-flex;
+    align-items: center;
+    gap: $space-sm;
     font-weight: 700;
     font-size: 1rem;
     color: var(--heading);
     letter-spacing: -0.02em;
+    text-decoration: none;
 
     &:hover {
         color: var(--accent);
+
+        .site-nav__logo-mark {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+    }
+}
+
+.site-nav__logo-mark {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 2rem;
+    height: 2rem;
+    padding: 0 0.35rem;
+    font-family: $font-mono;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    border: 1px solid var(--border);
+    border-radius: $radius-sm;
+    background: var(--surface);
+    transition: border-color $transition, color $transition;
+}
+
+.site-nav__logo-name {
+    display: none;
+    font-family: $font-display;
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+
+    @media (min-width: $bp-md-up) {
+        display: inline;
     }
 }
 

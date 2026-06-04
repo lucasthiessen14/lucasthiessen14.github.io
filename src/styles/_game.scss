@@ -582,19 +582,6 @@ body.game-active {
         display: none;
     }
 
-    .about__grid {
-        grid-template-columns: 1fr;
-        gap: $space-lg;
-    }
-
-    .about__photo {
-        justify-self: center;
-
-        img {
-            width: min(100%, 11rem);
-        }
-    }
-
     .about__stats {
         justify-content: center;
     }

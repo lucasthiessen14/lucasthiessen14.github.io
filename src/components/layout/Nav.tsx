@@ -43,7 +43,8 @@ export function Nav() {
           className="site-nav__logo"
           onClick={(e) => onNavClick(e, '#hero')}
         >
-          LT
+          <span className="site-nav__logo-mark">LT</span>
+          <span className="site-nav__logo-name">Lucas Thiessen</span>
         </a>
         <div className="site-nav__panel" id="nav-panel">
           <ul className="site-nav__links">
