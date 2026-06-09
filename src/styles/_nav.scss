@@ -226,3 +226,10 @@
         display: none;
     }
 }
+
+[data-theme='light'] {
+    .site-nav {
+        border-bottom-color: color-mix(in srgb, var(--border) 55%, transparent);
+        box-shadow: var(--shadow);
+    }
+}

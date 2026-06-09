@@ -1,10 +1,42 @@
 import { GitHubIcon, LinkedInIcon } from '../icons/SocialIcons';
+import { siteConfig } from '../../config/site';
 import { useHeroTagline } from '../../hooks/useHeroTagline';
 import { scrollToSelector } from '../../utils/scroll';
 
 type HeroSectionProps = {
   variant?: 'page' | 'modal';
 };
+
+function HeroInitials() {
+  return (
+    <div className="hero__initials" aria-hidden="true">
+      <span className="hero__initials-text">LT</span>
+    </div>
+  );
+}
+
+function HeroPhoto({ placement }: { placement: 'mobile' | 'desktop' }) {
+  const { profileDisplay, profileImage } = siteConfig;
+  const useInitials = profileDisplay === 'initials';
+
+  return (
+    <div className={`hero__visual hero__visual--${placement} reveal is-visible`}>
+      <div className="hero__photo-frame">
+        {useInitials ? (
+          <HeroInitials />
+        ) : (
+          <img
+            src={profileImage.src}
+            alt="Portrait of Lucas Thiessen"
+            width={profileImage.width}
+            height={profileImage.height}
+            fetchPriority={placement === 'desktop' ? 'high' : undefined}
+          />
+        )}
+      </div>
+    </div>
+  );
+}
 
 export function HeroSection({ variant = 'page' }: HeroSectionProps) {
   const { role, isAnimating } = useHeroTagline();
@@ -16,6 +48,7 @@ export function HeroSection({ variant = 'page' }: HeroSectionProps) {
         <span className="hero__badge-dot" aria-hidden="true" />
         Open to opportunities
       </div>
+      {!isModal && <HeroPhoto placement="mobile" />}
       <p className="hero__greeting">Hello, I&apos;m</p>
       <h1 className="hero__title">
         <span className="hero__title-line">Lucas</span>
@@ -92,34 +125,8 @@ export function HeroSection({ variant = 'page' }: HeroSectionProps) {
       <div className="hero__inner container">
         <div className="hero__layout">
           {content}
-          <div className="hero__visual reveal is-visible">
-            <div className="hero__photo-frame">
-              <img
-                src="/images/profile_pic.jpg"
-                alt="Portrait of Lucas Thiessen"
-                width={320}
-                height={320}
-                fetchPriority="high"
-              />
-            </div>
-          </div>
+          {!isModal && <HeroPhoto placement="desktop" />}
         </div>
-        <a
-          href="#about"
-          className="hero__scroll"
-          aria-label="Scroll to about section"
-          onClick={(e) => {
-            e.preventDefault();
-            scrollToSelector('#about');
-          }}
-        >
-          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
-            <path
-              fill="currentColor"
-              d="M12 16.5l-6-6h12l-6 6z"
-            />
-          </svg>
-        </a>
       </div>
     </section>
   );

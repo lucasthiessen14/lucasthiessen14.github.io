@@ -63,19 +63,21 @@ export function Nav() {
           </ul>
         </div>
         <div className="site-nav__actions">
-          <button
-            type="button"
-            className="nav-icon-btn theme-toggle"
-            id="theme-toggle"
-            aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
-            onClick={toggleTheme}
-          >
-            {theme === 'dark' ? (
-              <LightModeIcon aria-hidden />
-            ) : (
-              <DarkModeIcon aria-hidden />
-            )}
-          </button>
+          {mode === 'classic' && (
+            <button
+              type="button"
+              className="nav-icon-btn theme-toggle"
+              id="theme-toggle"
+              aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+              onClick={toggleTheme}
+            >
+              {theme === 'dark' ? (
+                <LightModeIcon aria-hidden />
+              ) : (
+                <DarkModeIcon aria-hidden />
+              )}
+            </button>
+          )}
           {gameModeEnabled && (
             <button
               type="button"

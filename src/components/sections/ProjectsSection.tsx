@@ -101,7 +101,7 @@ export function ProjectsSection({ variant = 'page' }: ProjectsSectionProps) {
   }
 
   return (
-    <section className="section section--alt" id="projects">
+    <section className="section" id="projects">
       <div className="container">{inner}</div>
     </section>
   );

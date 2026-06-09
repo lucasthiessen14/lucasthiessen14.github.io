@@ -29,6 +29,17 @@
     font-size: 1.05rem;
 }
 
+@media (max-width: $bp-md) {
+    #about .container {
+        padding-inline: $space-xl;
+    }
+
+    .about__text {
+        font-size: 1rem;
+        line-height: 1.65;
+    }
+}
+
 // Experience
 .experience-list {
     display: flex;
@@ -299,7 +310,7 @@
 
 .contact {
     padding: $space-2xl 0;
-    background: linear-gradient(180deg, var(--bg-alt) 0%, var(--surface) 100%);
+    background: linear-gradient(180deg, var(--bg) 0%, var(--surface) 100%);
     border-top: 1px solid var(--border);
 }
 
@@ -546,5 +557,34 @@
 @media (prefers-reduced-motion: reduce) {
     .experience-card:hover {
         transform: none;
+    }
+}
+
+[data-theme='light'] {
+    .about__stat {
+        background: var(--surface);
+        border-color: var(--border);
+        box-shadow: var(--shadow);
+    }
+
+    .experience-card {
+        border-color: var(--border);
+        box-shadow: var(--shadow);
+
+        &:hover {
+            border-color: color-mix(in srgb, var(--accent) 40%, var(--border));
+            box-shadow:
+                0 0 0 1px color-mix(in srgb, var(--accent) 14%, transparent),
+                var(--shadow);
+        }
+    }
+
+    .contact__form {
+        border-color: var(--border);
+        box-shadow: var(--shadow);
+    }
+
+    .contact {
+        background: linear-gradient(180deg, var(--bg) 0%, var(--surface) 100%);
     }
 }

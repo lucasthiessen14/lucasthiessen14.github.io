@@ -31,7 +31,7 @@ export function ExperienceSection({ variant = 'page' }: ExperienceSectionProps) 
   }
 
   return (
-    <section className="section section--alt" id="experience">
+    <section className="section" id="experience">
       <div className="container">{inner}</div>
     </section>
   );

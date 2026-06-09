@@ -80,6 +80,11 @@ ul {
 
 .section {
     padding: $space-3xl 0;
+    background: var(--bg);
+}
+
+.section--alt {
+    background: var(--bg-alt);
 }
 
 @media (max-width: $bp-md) {
@@ -95,10 +100,6 @@ ul {
     .container {
         padding: 0 $space-md;
     }
-}
-
-.section--alt {
-    background: var(--bg-alt);
 }
 
 .section__title {
@@ -253,4 +254,20 @@ ul {
     overflow: hidden;
     clip: rect(0, 0, 0, 0);
     border: 0;
+}
+
+[data-theme='light'] {
+    .btn--ghost {
+        background: var(--surface);
+        border-color: var(--border);
+
+        &:hover {
+            background: var(--surface-hover);
+        }
+    }
+
+    .tag {
+        background: var(--surface);
+        border-color: var(--border);
+    }
 }

@@ -49,7 +49,7 @@ export function AboutSection({ variant = 'page' }: AboutSectionProps) {
   }
 
   return (
-    <section className="section" id="about">
+    <section className="section section--alt" id="about">
       <div className="container">{inner}</div>
     </section>
   );

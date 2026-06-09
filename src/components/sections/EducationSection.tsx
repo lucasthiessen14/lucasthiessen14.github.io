@@ -29,7 +29,7 @@ export function EducationSection({ variant = 'page' }: EducationSectionProps) {
   }
 
   return (
-    <section className="section" id="education">
+    <section className="section section--alt" id="education">
       <div className="container">{inner}</div>
     </section>
   );

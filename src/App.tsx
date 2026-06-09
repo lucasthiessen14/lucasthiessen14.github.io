@@ -1,5 +1,6 @@
 import { GAME_MODE_ENABLED } from './config/features';
 import { useUiMode } from './context/UiModeContext';
+import { useGameThemeSync } from './hooks/useGameThemeSync';
 import { useReveal } from './hooks/useReveal';
 import { useScrollSpy } from './hooks/useScrollSpy';
 import { ClassicSite } from './components/ClassicSite';
@@ -9,6 +10,7 @@ import { Nav } from './components/layout/Nav';
 
 export function App() {
   const { mode } = useUiMode();
+  useGameThemeSync();
   useReveal(mode === 'classic');
   useScrollSpy();
 

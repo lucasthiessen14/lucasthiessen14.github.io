@@ -31,7 +31,7 @@ export function SkillsSection({ variant = 'page' }: SkillsSectionProps) {
   }
 
   return (
-    <section className="section" id="skills">
+    <section className="section section--alt" id="skills">
       <div className="container">{inner}</div>
     </section>
   );

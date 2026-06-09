@@ -107,3 +107,25 @@
         transform: none;
     }
 }
+
+[data-theme='light'] {
+    .project-card {
+        border-color: var(--border);
+        box-shadow: var(--shadow);
+
+        @media (prefers-reduced-motion: no-preference) {
+            &:hover {
+                border-color: color-mix(in srgb, var(--accent) 45%, var(--border));
+                box-shadow:
+                    0 4px 20px var(--accent-glow),
+                    var(--shadow);
+            }
+        }
+
+        &--featured {
+            @media (min-width: $bp-lg) {
+                border-color: color-mix(in srgb, var(--accent) 30%, var(--border));
+            }
+        }
+    }
+}
