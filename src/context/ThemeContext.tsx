@@ -18,28 +18,39 @@ type ThemeContextValue = {
 const ThemeContext = createContext<ThemeContextValue | null>(null);
 
 export function readStoredTheme(): ColorTheme {
-  const stored = localStorage.getItem(COLOR_THEME_STORAGE_KEY);
-  return stored === 'light' || stored === 'dark' ? stored : 'dark';
+  return localStorage.getItem(COLOR_THEME_STORAGE_KEY) === 'light' ? 'light' : 'dark';
 }
 
-function applyTheme(theme: ColorTheme) {
+function syncTheme(theme: ColorTheme) {
   document.documentElement.setAttribute('data-theme', theme);
-  localStorage.setItem(COLOR_THEME_STORAGE_KEY, theme);
+}
+
+function persistTheme(theme: ColorTheme) {
+  if (theme === 'light') {
+    localStorage.setItem(COLOR_THEME_STORAGE_KEY, 'light');
+  } else {
+    localStorage.removeItem(COLOR_THEME_STORAGE_KEY);
+  }
 }
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
   const [theme, setThemeState] = useState<ColorTheme>(() => readStoredTheme());
 
   useEffect(() => {
-    applyTheme(theme);
+    syncTheme(theme);
   }, [theme]);
 
   const setTheme = useCallback((next: ColorTheme) => {
     setThemeState(next);
+    persistTheme(next);
   }, []);
 
   const toggleTheme = useCallback(() => {
-    setThemeState((prev) => (prev === 'dark' ? 'light' : 'dark'));
+    setThemeState((prev) => {
+      const next = prev === 'dark' ? 'light' : 'dark';
+      persistTheme(next);
+      return next;
+    });
   }, []);
 
   const value = useMemo(

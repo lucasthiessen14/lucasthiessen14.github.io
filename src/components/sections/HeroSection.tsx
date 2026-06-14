@@ -41,14 +41,13 @@ function HeroPhoto({ placement }: { placement: 'mobile' | 'desktop' }) {
 export function HeroSection({ variant = 'page' }: HeroSectionProps) {
   const { role, isAnimating } = useHeroTagline();
   const isModal = variant === 'modal';
+  const { profileDisplay } = siteConfig;
+  const showPortrait = profileDisplay === 'photo' || profileDisplay === 'initials';
+  const isCentered = profileDisplay === 'none' && !isModal;
 
   const content = (
     <div className="hero__content reveal is-visible">
-      <div className="hero__badge">
-        <span className="hero__badge-dot" aria-hidden="true" />
-        Open to opportunities
-      </div>
-      {!isModal && <HeroPhoto placement="mobile" />}
+      {!isModal && showPortrait && <HeroPhoto placement="mobile" />}
       <p className="hero__greeting">Hello, I&apos;m</p>
       <h1 className="hero__title">
         <span className="hero__title-line">Lucas</span>
@@ -117,7 +116,10 @@ export function HeroSection({ variant = 'page' }: HeroSectionProps) {
   if (isModal) return content;
 
   return (
-    <section className="hero" id="hero">
+    <section
+      className={`hero${isCentered ? ' hero--centered' : ''}`}
+      id="hero"
+    >
       <div className="hero__bg" aria-hidden="true" />
       <div className="hero__grid" aria-hidden="true" />
       <div className="hero__orb hero__orb--1" aria-hidden="true" />
@@ -125,7 +127,7 @@ export function HeroSection({ variant = 'page' }: HeroSectionProps) {
       <div className="hero__inner container">
         <div className="hero__layout">
           {content}
-          {!isModal && <HeroPhoto placement="desktop" />}
+          {!isModal && showPortrait && <HeroPhoto placement="desktop" />}
         </div>
       </div>
     </section>

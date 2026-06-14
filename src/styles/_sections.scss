@@ -1,9 +1,31 @@
 @use 'variables' as *;
 
 // About
-.about__content {
-    max-width: 42rem;
+.about__layout {
+    display: grid;
+    gap: $space-xl;
+    align-items: center;
+    max-width: 52rem;
     margin: 0 auto;
+}
+
+.about__photo {
+    justify-self: center;
+    width: 100%;
+    max-width: 200px;
+
+    img {
+        display: block;
+        width: 100%;
+        height: auto;
+        border-radius: $radius-lg;
+        border: 1px solid var(--border);
+        box-shadow: var(--shadow);
+    }
+}
+
+.about__body {
+    min-width: 0;
 }
 
 .about__stats {
@@ -27,6 +49,17 @@
 .about__text {
     color: var(--text);
     font-size: 1.05rem;
+}
+
+@media (min-width: $bp-lg) {
+    .about__layout {
+        grid-template-columns: minmax(180px, 200px) 1fr;
+        gap: $space-2xl;
+    }
+
+    .about__photo {
+        justify-self: end;
+    }
 }
 
 @media (max-width: $bp-md) {

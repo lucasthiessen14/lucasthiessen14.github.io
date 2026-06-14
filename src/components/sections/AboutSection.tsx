@@ -1,3 +1,4 @@
+import { siteConfig } from '../../config/site';
 import { SectionTitle } from './SectionTitle';
 import { scrollToSelector } from '../../utils/scroll';
 
@@ -12,34 +13,46 @@ export function AboutSection({ variant = 'page' }: AboutSectionProps) {
   const inner = (
     <>
       {variant === 'page' && <SectionTitle number="01">About Me</SectionTitle>}
-      <div className="about__content reveal">
-        <ul className="about__stats">
-          <li className="about__stat">University of Waterloo</li>
-          <li className="about__stat">Computer Engineering</li>
-          <li className="about__stat">Age {age}</li>
-        </ul>
-        <p className="about__text">
-          I&apos;m a computer engineering graduate from the University of Waterloo with
-          experience in C++, embedded systems, robotics, and full-stack development.
-          I&apos;ve worked across multiple tech roles, building everything from autonomous
-          robots and FPGA processors to PHP/JavaScript web platforms and AI-powered features.
-        </p>
-        <p className="about__text">
-          I enjoy solving complex engineering problems, designing intuitive user experiences,
-          and creating systems that are fast, reliable, and impactful.
-        </p>
+      <div className="about__layout reveal">
         {variant === 'page' && (
-          <a
-            href="#contact"
-            className="btn btn--text"
-            onClick={(e) => {
-              e.preventDefault();
-              scrollToSelector('#contact');
-            }}
-          >
-            Contact me →
-          </a>
+          <div className="about__photo">
+            <img
+              src={siteConfig.profileImage.src}
+              alt="Portrait of Lucas Thiessen"
+              width={siteConfig.profileImage.width}
+              height={siteConfig.profileImage.height}
+            />
+          </div>
         )}
+        <div className="about__body">
+          <ul className="about__stats">
+            <li className="about__stat">University of Waterloo</li>
+            <li className="about__stat">Computer Engineering</li>
+            <li className="about__stat">Age {age}</li>
+          </ul>
+          <p className="about__text">
+            I&apos;m a computer engineering graduate from the University of Waterloo with
+            experience in C++, embedded systems, robotics, and full-stack development.
+            I&apos;ve worked across multiple tech roles, building everything from autonomous
+            robots and FPGA processors to PHP/JavaScript web platforms and AI-powered features.
+          </p>
+          <p className="about__text">
+            I enjoy solving complex engineering problems, designing intuitive user experiences,
+            and creating systems that are fast, reliable, and impactful.
+          </p>
+          {variant === 'page' && (
+            <a
+              href="#contact"
+              className="btn btn--text"
+              onClick={(e) => {
+                e.preventDefault();
+                scrollToSelector('#contact');
+              }}
+            >
+              Contact me →
+            </a>
+          )}
+        </div>
       </div>
     </>
   );

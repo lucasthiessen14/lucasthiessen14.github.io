@@ -117,48 +117,6 @@
     }
 }
 
-.hero__badge {
-    display: inline-flex;
-    align-items: center;
-    gap: $space-sm;
-    margin-bottom: $space-lg;
-    padding: 0.35rem 0.85rem 0.35rem 0.65rem;
-    font-family: $font-mono;
-    font-size: 0.7rem;
-    font-weight: 600;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    color: var(--hero-accent);
-    background: var(--hero-surface);
-    border: 1px solid var(--hero-border);
-    border-radius: $radius-full;
-    box-shadow: 0 1px 0 color-mix(in srgb, var(--hero-heading) 6%, transparent) inset;
-}
-
-.hero__badge-dot {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: var(--hero-accent);
-    box-shadow: 0 0 10px var(--accent-glow);
-
-    @media (prefers-reduced-motion: no-preference) {
-        animation: hero-pulse 2.4s ease-in-out infinite;
-    }
-}
-
-@keyframes hero-pulse {
-    0%,
-    100% {
-        opacity: 1;
-        transform: scale(1);
-    }
-    50% {
-        opacity: 0.55;
-        transform: scale(0.92);
-    }
-}
-
 .hero__greeting {
     font-family: $font-mono;
     font-size: 0.8125rem;
@@ -181,7 +139,11 @@
     margin-bottom: $space-md;
 
     @media (min-width: $bp-lg) {
-        align-items: flex-start;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: baseline;
+        justify-content: flex-start;
+        gap: 0.3em;
     }
 }
 
@@ -386,6 +348,45 @@
     -webkit-text-fill-color: transparent;
 }
 
+.hero--centered {
+    .hero__layout {
+        display: flex;
+        justify-content: center;
+    }
+
+    .hero__content {
+        text-align: center;
+        max-width: 42rem;
+        margin: 0 auto;
+    }
+
+    .hero__title {
+        align-items: baseline;
+    }
+
+    .hero__subtitle {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .hero__cta,
+    .hero__social {
+        justify-content: center;
+    }
+
+    @media (min-width: $bp-lg) {
+        .hero__title {
+            font-size: clamp(2.75rem, 5vw, 4.5rem);
+            justify-content: center;
+        }
+
+        .hero__subtitle {
+            font-size: 1.125rem;
+            max-width: 36rem;
+        }
+    }
+}
+
 @media (max-width: ($bp-lg - 0.02px)) {
     .hero__layout {
         gap: $space-md;
@@ -442,12 +443,6 @@
         flex-direction: column;
         align-items: center;
         gap: $space-md;
-    }
-
-    .hero__badge {
-        margin-bottom: 0;
-        font-size: 0.625rem;
-        padding: 0.28rem 0.7rem 0.28rem 0.5rem;
     }
 
     .hero__visual--mobile {
