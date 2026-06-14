@@ -115,15 +115,6 @@
         margin: 0;
         max-width: none;
     }
-
-    &::before {
-        content: '';
-        position: absolute;
-        inset: -2rem -2.5rem;
-        background: radial-gradient(ellipse 90% 85% at 30% 50%, var(--hero-content-glow), transparent 72%);
-        z-index: -1;
-        pointer-events: none;
-    }
 }
 
 .hero__badge {
@@ -451,10 +442,6 @@
         flex-direction: column;
         align-items: center;
         gap: $space-md;
-
-        &::before {
-            display: none;
-        }
     }
 
     .hero__badge {
