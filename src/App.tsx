@@ -6,6 +6,7 @@ import { ClassicSite } from './components/ClassicSite';
 import { GameMode } from './components/game/GameMode';
 import { Footer } from './components/layout/Footer';
 import { Nav } from './components/layout/Nav';
+import { PlainSite } from './components/plain/PlainSite';
 import { ViewUnlockModal } from './components/ViewUnlockModal';
 
 export function App() {
@@ -14,13 +15,22 @@ export function App() {
   useReveal(mode === 'classic');
   useScrollSpy();
 
+  const showModernChrome = mode === 'classic';
+
   return (
     <>
-      <div className="scroll-progress" id="scroll-progress" aria-hidden="true" />
-      <Nav />
-      {mode === 'classic' && <ClassicSite />}
+      {showModernChrome && (
+        <div className="scroll-progress" id="scroll-progress" aria-hidden="true" />
+      )}
+      {showModernChrome && <Nav />}
+      {mode === 'classic' && (
+        <>
+          <ClassicSite />
+          <Footer />
+        </>
+      )}
+      {mode === 'plain' && <PlainSite />}
       <GameMode />
-      {mode === 'classic' && <Footer />}
       <ViewUnlockModal />
     </>
   );

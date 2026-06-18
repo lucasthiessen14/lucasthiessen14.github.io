@@ -6,7 +6,7 @@ const DEFAULT_VIEW_KEY = 'defaultView';
 const UI_MODE_KEY = 'uiMode';
 
 function isViewId(value: string): value is ViewId {
-  return value === 'classic' || value === 'game';
+  return value === 'classic' || value === 'game' || value === 'plain';
 }
 
 export function readDiscoveredViews(): ViewId[] {

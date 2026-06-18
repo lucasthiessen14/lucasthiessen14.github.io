@@ -36,6 +36,9 @@ jobs:
           test -f dist/index.html
           ! grep -q '/src/main.tsx' dist/index.html
           grep -q '/assets/' dist/index.html
+          grep -q 'game-mode' dist/assets/*.js
+          grep -q 'adventure' dist/assets/*.js
+          grep -q 'plain' dist/assets/*.js
 
       - uses: actions/configure-pages@v5
 

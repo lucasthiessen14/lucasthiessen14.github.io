@@ -9,6 +9,7 @@ import {
 } from 'react';
 import { useUiMode } from '../../context/UiModeContext';
 import { SECTION_LABELS, SECTION_SHORT, type SectionId } from '../../types/sections';
+import { ViewMenu } from '../views/ViewMenu';
 import {
   CELL_SIZE,
   SECTION_COUNT,
@@ -40,7 +41,7 @@ type CellEntry = {
 };
 
 export function GameMode() {
-  const { mode, setMode } = useUiMode();
+  const { mode } = useUiMode();
   const viewportRef = useRef<HTMLDivElement>(null);
   const mazeWorldRef = useRef<HTMLDivElement>(null);
   const avatarRef = useRef<HTMLDivElement>(null);
@@ -381,12 +382,21 @@ export function GameMode() {
   }, [mode]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
+    const el = viewportRef.current;
+    if (!el || mode !== 'game') return;
+
     const onResize = () => {
-      if (mode === 'game') positionView(player, maze, panRef.current);
+      positionView(playerRef.current, maze, panRef.current);
     };
+
+    const observer = new ResizeObserver(onResize);
+    observer.observe(el);
     window.addEventListener('resize', onResize);
-    return () => window.removeEventListener('resize', onResize);
-  }, [mode, player, maze, positionView]);
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('resize', onResize);
+    };
+  }, [mode, maze, positionView]);
 
   useEffect(() => {
     const onKeyDown = (e: globalThis.KeyboardEvent) => {
@@ -487,21 +497,36 @@ export function GameMode() {
     height: mazePixelH,
   };
 
+  const discoveryPercent = Math.round((visited.size / SECTION_COUNT) * 100);
+
   return (
     <div className="game-mode" aria-hidden={false}>
       <div className="game-mode__hud">
         <div className="game-mode__hud-left">
           <h2 className="game-mode__title">Lucas&apos;s World</h2>
-          <p className="game-mode__progress" aria-live="polite">
-            {visited.size} / {SECTION_COUNT} discovered
-          </p>
+          <div className="game-mode__progress-wrap">
+            <p className="game-mode__progress" aria-live="polite">
+              {visited.size} / {SECTION_COUNT} discovered
+            </p>
+            <div
+              className="game-mode__progress-bar"
+              role="progressbar"
+              aria-valuenow={visited.size}
+              aria-valuemin={0}
+              aria-valuemax={SECTION_COUNT}
+              aria-label="Portfolio sections discovered"
+            >
+              <span
+                className="game-mode__progress-fill"
+                style={{ width: `${discoveryPercent}%` }}
+              />
+            </div>
+          </div>
         </div>
         <p className="game-mode__hint">
           WASD or arrows to move · Drag or scroll to pan · Double-click map to recenter
         </p>
-        <button type="button" className="btn btn--ghost game-mode__exit" onClick={() => setMode('classic')}>
-          Exit to Classic
-        </button>
+        <ViewMenu variant="game" />
       </div>
 
       <div

@@ -28,6 +28,15 @@ export const DISCOVERABLE_VIEWS: DiscoverableView[] = [
     achievementDescription:
       'You discovered the adventure map — explore the portfolio as an interactive maze.',
   },
+  {
+    id: 'plain',
+    urlParam: 'view',
+    urlValue: 'plain',
+    label: 'Plain',
+    achievementTitle: 'Source View',
+    achievementDescription:
+      'You found the plain HTML version of this site — just tags and browser defaults.',
+  },
 ];
 
 export function findDiscoverableView(params: URLSearchParams): DiscoverableView | null {

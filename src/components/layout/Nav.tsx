@@ -62,7 +62,7 @@ export function Nav() {
           </ul>
         </div>
         <div className="site-nav__actions">
-          {mode === 'classic' && (
+          {mode !== 'game' && mode !== 'plain' && (
             <button
               type="button"
               className="nav-icon-btn theme-toggle"

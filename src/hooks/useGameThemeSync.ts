@@ -9,11 +9,11 @@ export function useGameThemeSync(): void {
   const savedTheme = useRef<ColorTheme | null>(null);
 
   useEffect(() => {
-    if (mode === 'game') {
+    if (mode === 'game' || mode === 'plain') {
       if (savedTheme.current === null) {
         savedTheme.current = theme;
       }
-      document.documentElement.setAttribute('data-theme', 'dark');
+      document.documentElement.setAttribute('data-theme', mode === 'game' ? 'dark' : 'light');
       return;
     }
 

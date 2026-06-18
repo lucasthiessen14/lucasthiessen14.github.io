@@ -24,19 +24,19 @@
 }
 
 body.game-active {
+    .site-nav,
     .site-main,
     .site-footer--classic,
-    .scroll-progress,
-    .site-nav__panel {
+    .scroll-progress {
         display: none !important;
     }
+
     overflow: hidden;
 }
 
 .game-mode {
     position: fixed;
     inset: 0;
-    top: $nav-height;
     z-index: 900;
     display: flex;
     flex-direction: column;
@@ -60,60 +60,118 @@ body.game-active {
 }
 
 .game-mode__hud {
-    display: flex;
-    flex-wrap: wrap;
+    position: relative;
+    z-index: 20;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr) auto;
     align-items: center;
-    justify-content: space-between;
-    gap: $space-sm $space-md;
-    padding: $space-md $space-lg;
-    border-bottom: 1px solid var(--border);
-    background: var(--nav-bg);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    gap: $space-md;
+    padding: $space-sm $space-lg;
+    border-bottom: 1px solid color-mix(in srgb, var(--accent) 22%, var(--border));
+    background: color-mix(in srgb, var(--nav-bg) 88%, transparent);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: 0 1px 0 color-mix(in srgb, var(--accent) 8%, transparent);
+
+    @media (max-width: $bp-lg) {
+        grid-template-columns: 1fr auto;
+        grid-template-areas:
+            'title views'
+            'progress progress'
+            'hint hint';
+        gap: $space-sm $space-md;
+    }
 }
 
 .game-mode__hud-left {
     display: flex;
     flex-direction: column;
-    gap: 0.15rem;
+    gap: 0.35rem;
+    min-width: 0;
+
+    @media (max-width: $bp-lg) {
+        grid-area: title;
+    }
 }
 
 .game-mode__title {
     margin: 0;
-    font-size: 0.95rem;
-    font-weight: 700;
+    font-family: $font-display;
+    font-size: 1rem;
+    font-weight: 800;
     color: var(--heading);
-    letter-spacing: -0.02em;
+    letter-spacing: -0.03em;
+}
+
+.game-mode__progress-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    min-width: 0;
+
+    @media (max-width: $bp-lg) {
+        grid-area: progress;
+    }
 }
 
 .game-mode__progress {
     margin: 0;
     font-family: $font-mono;
-    font-size: 0.75rem;
+    font-size: 0.6875rem;
     font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
     color: var(--text-muted);
+}
+
+.game-mode__progress-bar {
+    width: min(100%, 12rem);
+    height: 5px;
+    border-radius: $radius-full;
+    background: color-mix(in srgb, var(--border) 70%, transparent);
+    overflow: hidden;
+}
+
+.game-mode__progress-fill {
+    display: block;
+    height: 100%;
+    border-radius: inherit;
+    background: linear-gradient(90deg, var(--accent-dim), var(--accent));
+    box-shadow: 0 0 10px var(--accent-glow);
+    transition: width 0.35s ease;
 }
 
 .game-mode__hint {
     margin: 0;
-    flex: 1;
+    min-width: 0;
     text-align: center;
-    font-size: 0.8rem;
+    font-size: 0.75rem;
+    line-height: 1.4;
     color: var(--text-muted);
-}
 
-.game-mode__exit {
-    flex-shrink: 0;
-    white-space: nowrap;
+    @media (max-width: $bp-lg) {
+        grid-area: hint;
+        text-align: left;
+    }
 }
 
 .game-mode__viewport {
     position: relative;
+    z-index: 1;
     flex: 1;
     min-height: 0;
     overflow: hidden;
     outline: none;
     background: var(--game-map-bg);
+
+    &::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        z-index: 4;
+        pointer-events: none;
+        background: radial-gradient(ellipse at center, transparent 40%, rgba(0, 0, 0, 0.35) 100%);
+    }
 
     &:focus-visible {
         box-shadow: inset 0 0 0 2px var(--accent);
@@ -463,8 +521,10 @@ body.game-active {
     width: min(92%, 24rem);
     padding: $space-md $space-lg;
     border-radius: $radius-lg;
-    border: 1px solid var(--border);
-    background: var(--surface);
+    border: 1px solid color-mix(in srgb, var(--accent) 35%, var(--border));
+    background: color-mix(in srgb, var(--surface) 92%, transparent);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     box-shadow: var(--game-overlay-shadow);
     text-align: center;
 
@@ -487,7 +547,6 @@ body.game-active {
 .game-mode__modal {
     position: fixed;
     inset: 0;
-    top: $nav-height;
     z-index: 960;
     display: flex;
     align-items: center;

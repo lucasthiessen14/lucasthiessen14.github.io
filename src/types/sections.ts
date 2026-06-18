@@ -30,7 +30,7 @@ export const SECTION_SHORT: Record<SectionId, string> = {
   contact: 'Contact',
 };
 
-export type UiMode = 'classic' | 'game';
+export type UiMode = 'classic' | 'game' | 'plain';
 
 export type Direction = { dr: number; dc: number };
 

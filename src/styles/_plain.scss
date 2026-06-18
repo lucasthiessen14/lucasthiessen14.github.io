@@ -1,0 +1,106 @@
+@use 'variables' as *;
+
+// Plain HTML view — browser-default styling with only minimal resets
+[data-ui='plain'] {
+    color-scheme: light;
+
+    .scroll-progress,
+    .site-nav {
+        display: none !important;
+    }
+
+    body {
+        margin: 8px;
+        font-family: 'Times New Roman', Times, serif;
+        font-size: 16px;
+        line-height: normal;
+        color: #000;
+        background: #fff;
+    }
+
+    .plain-site {
+        margin: 0;
+        padding: 0;
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            margin: 0.67em 0;
+            font-family: inherit;
+            font-weight: bold;
+            color: #000;
+            text-shadow: none;
+            letter-spacing: normal;
+        }
+
+        h1 {
+            font-size: 2em;
+        }
+
+        h2 {
+            font-size: 1.5em;
+        }
+
+        h3 {
+            font-size: 1.17em;
+        }
+
+        p {
+            margin: 1em 0;
+        }
+
+        ul {
+            margin: 1em 0;
+            padding-left: 2.5em;
+            list-style: disc;
+        }
+
+        li {
+            margin: 0;
+        }
+
+        hr {
+            display: block;
+            margin: 0.5em 0;
+            border: none;
+            border-top: 1px solid #000;
+            height: 0;
+        }
+
+        a {
+            color: #00f;
+            text-decoration: underline;
+
+            &:visited {
+                color: #551a8b;
+            }
+
+            &:hover {
+                color: #00f;
+                background: transparent;
+            }
+        }
+
+        address {
+            font-style: normal;
+            margin: 1em 0;
+        }
+
+        img {
+            border: 0;
+        }
+
+        small {
+            font-size: smaller;
+        }
+
+        i {
+            font-style: italic;
+        }
+
+        b {
+            font-weight: bold;
+        }
+    }
+}
