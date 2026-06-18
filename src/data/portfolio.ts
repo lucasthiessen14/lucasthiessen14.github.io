@@ -4,10 +4,10 @@ export const experienceItems = [
     company: 'Mikobyte Solutions',
     role: 'Software Developer',
     bullets: [
-      'Developed a chat feature in C++ using the ChatGPT API, allowing tenants to obtain detailed, context-aware answers to building-related questions.',
-      'Implemented custom document chunking and message content generation to improve response accuracy.',
-      'Created a user-friendly stock trading interface, enabling seamless interaction with real-time stock market data.',
-      'Designed and optimized algorithmic solutions in C++ to meet client requirements and performance constraints.',
+      'Refactored the company’s core C++ networking stack (TCP connections, socket abstractions, thread pools, IOCP-based I/O, multicast support), validated with test applications and integrated into trading and blockchain systems.',
+      'Built cryptocurrency node software with custom P2P networking, consensus rules (mempool, longest-chain selection, mining logic), multi-wallet RPC support, and persistent storage using LevelDB/SQLite.',
+      'Implemented a C++ market simulator and trading client with internal networking and FIX-style protocols, featuring an order book, matching engine, price simulation, and desktop UI for order entry and market monitoring.',
+      'Built MFC-based developer tooling to scaffold full-stack applications, generating backend services, static sites, and React frontends, along with database schemas and optional AI-assisted branding and theming.',
     ],
   },
   {
