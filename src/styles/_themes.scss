@@ -67,6 +67,7 @@
     --game-floor-visible: #323d4f;
     --game-cell-inset: rgba(255, 255, 255, 0.12);
     --game-cell-inset-subtle: rgba(255, 255, 255, 0.08);
+    --game-cell-line: rgba(69, 232, 255, 0.16);
     --game-marker-bg: rgba(0, 0, 0, 0.35);
     --game-cell-border: transparent;
     --game-cell-border-faint: transparent;
@@ -138,6 +139,7 @@
     --game-floor-visible: #4a7894;
     --game-cell-border: rgba(15, 35, 60, 0.28);
     --game-cell-border-faint: rgba(15, 35, 60, 0.14);
+    --game-cell-line: transparent;
     --game-cell-inset: rgba(255, 255, 255, 0.45);
     --game-cell-inset-subtle: rgba(15, 35, 60, 0.18);
     --game-marker-bg: #ffffff;
@@ -206,6 +208,7 @@
     --game-floor-visible: #323d4f;
     --game-cell-inset: rgba(255, 255, 255, 0.12);
     --game-cell-inset-subtle: rgba(255, 255, 255, 0.08);
+    --game-cell-line: rgba(69, 232, 255, 0.16);
     --game-marker-bg: rgba(0, 0, 0, 0.35);
     --game-cell-border: transparent;
     --game-cell-border-faint: transparent;

@@ -46,7 +46,19 @@ export function HeroSection({ variant = 'page' }: HeroSectionProps) {
   const isCentered = profileDisplay === 'none' && !isModal;
 
   const content = (
-    <div className="hero__content reveal is-visible">
+    <div
+      className={`hero__content reveal is-visible${isModal ? ' hero__content--modal' : ''}`}
+    >
+      {isModal && (
+        <div className="hero__modal-photo">
+          <img
+            src={siteConfig.profileImage.src}
+            alt="Portrait of Lucas Thiessen"
+            width={siteConfig.profileImage.width}
+            height={siteConfig.profileImage.height}
+          />
+        </div>
+      )}
       {!isModal && showPortrait && <HeroPhoto placement="mobile" />}
       <p className="hero__greeting">Hello, I&apos;m</p>
       <h1 className="hero__title">

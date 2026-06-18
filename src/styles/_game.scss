@@ -179,6 +179,8 @@ body.game-active {
     display: grid;
     position: relative;
     z-index: 1;
+    border-right: 1px solid var(--game-cell-line, transparent);
+    border-bottom: 1px solid var(--game-cell-line, transparent);
 }
 
 .game-mode__cell {
@@ -187,14 +189,17 @@ body.game-active {
     height: 100%;
     box-sizing: border-box;
 
+    &:not(.is-hidden) {
+        border-top: 1px solid var(--game-cell-line, transparent);
+        border-left: 1px solid var(--game-cell-line, transparent);
+    }
+
     &.is-wall {
         background: var(--game-wall);
-        box-shadow: inset 0 0 0 1px var(--game-cell-inset);
     }
 
     &.is-floor {
         background: var(--game-floor);
-        box-shadow: inset 0 0 0 1px var(--game-cell-inset-subtle);
     }
 
     &.is-section.is-visible .game-mode__section-marker {
@@ -204,17 +209,17 @@ body.game-active {
     // Unvisited section in vision — destination stands out from normal lit floor
     &.is-section.is-visible.is-floor:not(.is-found):not(.is-visited) {
         background: var(--game-floor-section);
-        box-shadow:
-            inset 0 0 0 1px color-mix(in srgb, var(--accent) 65%, transparent),
-            0 0 0 1px color-mix(in srgb, var(--accent) 35%, transparent),
-            0 0 20px var(--accent-glow);
+        border-top-color: color-mix(in srgb, var(--accent) 65%, transparent);
+        border-left-color: color-mix(in srgb, var(--accent) 65%, transparent);
+        box-shadow: 0 0 20px var(--accent-glow);
     }
 
     // Found or visited — still reads as a landmark vs surrounding floor
     &.is-section.is-found.is-floor,
     &.is-section.is-visited.is-floor {
         background: var(--game-floor-found);
-        box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 28%, transparent);
+        border-top-color: color-mix(in srgb, var(--accent) 28%, transparent);
+        border-left-color: color-mix(in srgb, var(--accent) 28%, transparent);
     }
 
     &.is-section.is-visited.is-visible .game-mode__section-marker {
@@ -224,14 +229,15 @@ body.game-active {
 
     &.is-section.is-visited.is-explored.is-floor {
         background: var(--game-section-explored-visited, var(--game-path-visited, var(--game-floor-visited))) !important;
-        box-shadow:
-            inset 0 0 0 1px color-mix(in srgb, var(--accent) 42%, transparent),
-            0 0 18px color-mix(in srgb, var(--accent) 14%, transparent) !important;
+        border-top-color: color-mix(in srgb, var(--accent) 42%, transparent);
+        border-left-color: color-mix(in srgb, var(--accent) 42%, transparent);
+        box-shadow: 0 0 18px color-mix(in srgb, var(--accent) 14%, transparent) !important;
     }
 
     &.is-hidden {
         background: var(--game-fog-hidden) !important;
         box-shadow: none !important;
+        border-color: transparent !important;
 
         .game-mode__section-marker {
             opacity: 0;
@@ -244,11 +250,13 @@ body.game-active {
         &.is-wall {
             background: var(--game-fog-explored-wall) !important;
             box-shadow: none !important;
+            border-color: transparent !important;
         }
 
         &.is-floor {
             background: var(--game-path-explored) !important;
-            box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 28%, transparent) !important;
+            border-top-color: color-mix(in srgb, var(--accent) 28%, transparent);
+            border-left-color: color-mix(in srgb, var(--accent) 28%, transparent);
         }
 
         /* Section markers only exist on section cells — dim only before landmark is logged */
@@ -259,9 +267,9 @@ body.game-active {
         // Section / destination tiles — not plain path: brighter + accent edge
         &.is-section.is-floor:not(.is-visible) {
             background: var(--game-section-explored, var(--game-path-explored)) !important;
-            box-shadow:
-                inset 0 0 0 1px color-mix(in srgb, var(--accent) 42%, transparent),
-                0 0 16px color-mix(in srgb, var(--accent) 10%, transparent) !important;
+            border-top-color: color-mix(in srgb, var(--accent) 42%, transparent);
+            border-left-color: color-mix(in srgb, var(--accent) 42%, transparent);
+            box-shadow: 0 0 16px color-mix(in srgb, var(--accent) 10%, transparent) !important;
 
             &:not(.is-found):not(.is-visited) .game-mode__section-marker {
                 opacity: 0.48;
@@ -273,12 +281,10 @@ body.game-active {
     &.is-visible {
         &.is-wall {
             background: var(--game-wall-visible);
-            box-shadow: inset 0 0 0 1px var(--game-cell-inset);
         }
 
         &.is-floor {
             background: var(--game-floor-visible);
-            box-shadow: inset 0 0 0 1px var(--game-cell-inset-subtle);
         }
 
         .game-mode__section-marker {
@@ -290,9 +296,9 @@ body.game-active {
     &.is-section.is-visible.is-floor.is-found,
     &.is-section.is-visible.is-floor.is-visited {
         background: var(--game-floor-found) !important;
-        box-shadow:
-            inset 0 0 0 1px color-mix(in srgb, var(--accent) 48%, transparent),
-            0 0 18px color-mix(in srgb, var(--accent) 16%, transparent) !important;
+        border-top-color: color-mix(in srgb, var(--accent) 48%, transparent);
+        border-left-color: color-mix(in srgb, var(--accent) 48%, transparent);
+        box-shadow: 0 0 18px color-mix(in srgb, var(--accent) 16%, transparent) !important;
     }
 }
 
@@ -525,6 +531,10 @@ body.game-active {
     overflow: hidden;
 }
 
+.game-mode__modal-dialog:has(.hero__content--modal) {
+    width: min(100%, 26rem);
+}
+
 .game-mode__modal.is-open .game-mode__modal-dialog {
     transform: translateY(0) scale(1);
 }
@@ -704,30 +714,103 @@ body.game-active {
         width: 100%;
     }
 
-    &:has(> .hero__content) {
+    &:has(> .hero__content--modal) {
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        min-height: 18rem;
+        padding-block: $space-xl;
     }
 
-    > .hero__content {
+    > .hero__content--modal {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        max-width: 22rem;
+        margin: 0 auto;
+        text-align: center;
+        gap: $space-md;
+    }
+
+    .hero__modal-photo {
+        width: 5.5rem;
+        height: 5.5rem;
+        border-radius: 50%;
+        overflow: hidden;
+        border: 2px solid color-mix(in srgb, var(--accent) 45%, var(--border));
+        box-shadow: 0 8px 24px color-mix(in srgb, var(--accent) 18%, transparent);
+        flex-shrink: 0;
+
+        img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center top;
+        }
+    }
+
+    .hero__content--modal .hero__greeting {
+        margin-bottom: 0;
+    }
+
+    .hero__content--modal .hero__title {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: baseline;
+        gap: 0.3em;
+        font-size: clamp(1.65rem, 4.5vw, 2.15rem);
+        margin-bottom: 0;
+    }
+
+    .hero__content--modal .hero__title-line {
+        display: inline;
+    }
+
+    .hero__content--modal .hero__tagline {
+        margin-bottom: 0;
+        min-height: 1.5em;
+        font-size: 0.975rem;
+    }
+
+    .hero__content--modal .hero__subtitle {
+        margin: 0;
+        font-size: 0.9375rem;
+        line-height: 1.6;
+        max-width: 20rem;
+    }
+
+    .hero__content--modal .hero__cta {
+        justify-content: center;
+        width: 100%;
+        max-width: none;
+        margin: 0;
+    }
+
+    .hero__content--modal .hero__social {
+        justify-content: center;
+        width: 100%;
+        margin: 0;
+    }
+
+    > .hero__content:not(.hero__content--modal) {
         width: 100%;
         max-width: 28rem;
         margin: auto;
         text-align: center;
     }
 
-    .hero__title {
+    > .hero__content:not(.hero__content--modal) .hero__title {
         font-size: clamp(1.5rem, 5vw, 2rem);
     }
 
-    .hero__tagline {
+    > .hero__content:not(.hero__content--modal) .hero__tagline {
         margin-bottom: $space-lg;
     }
 
-    .hero__cta {
+    > .hero__content:not(.hero__content--modal) .hero__cta {
         width: max-content;
         max-width: 100%;
         margin-left: auto;
@@ -735,7 +818,7 @@ body.game-active {
         margin-bottom: $space-lg;
     }
 
-    .hero__social {
+    > .hero__content:not(.hero__content--modal) .hero__social {
         margin-top: 0;
     }
 
@@ -780,23 +863,22 @@ body.game-active {
             &.is-wall:not(.is-visible) {
                 background: color-mix(in srgb, var(--game-fog-explored-wall) 82%, transparent) !important;
                 box-shadow: none !important;
+                border-color: transparent !important;
             }
 
             &.is-floor:not(.is-visible) {
                 background: color-mix(in srgb, var(--game-path-explored) 86%, transparent) !important;
-                box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 35%, transparent) !important;
+                border-color: transparent !important;
             }
         }
 
         &.is-visible {
             &.is-wall {
                 background: color-mix(in srgb, var(--game-wall-visible) 90%, transparent) !important;
-                box-shadow: inset 0 0 0 1px var(--game-cell-inset) !important;
             }
 
             &.is-floor {
                 background: color-mix(in srgb, var(--game-floor-visible) 88%, transparent) !important;
-                box-shadow: inset 0 0 0 1px var(--game-cell-inset-subtle) !important;
             }
         }
 
