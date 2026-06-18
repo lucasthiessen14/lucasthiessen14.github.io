@@ -535,6 +535,10 @@ body.game-active {
     width: min(100%, 26rem);
 }
 
+.game-mode__modal-dialog:has(.about--modal) {
+    width: min(100%, 34rem);
+}
+
 .game-mode__modal.is-open .game-mode__modal-dialog {
     transform: translateY(0) scale(1);
 }
@@ -592,8 +596,62 @@ body.game-active {
         display: none;
     }
 
-    .about__stats {
-        justify-content: center;
+    .about--modal {
+        .about__layout--modal {
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            gap: $space-lg;
+            max-width: none;
+            margin: 0;
+        }
+
+        .about__photo {
+            justify-self: center;
+            width: auto;
+            max-width: none;
+            margin: 0 auto;
+
+            img {
+                width: 5.5rem;
+                height: 5.5rem;
+                border-radius: 50%;
+                object-fit: cover;
+                object-position: center top;
+                border: 2px solid color-mix(in srgb, var(--accent) 45%, var(--border));
+                box-shadow: 0 8px 24px color-mix(in srgb, var(--accent) 18%, transparent);
+            }
+        }
+
+        .about__body {
+            width: 100%;
+        }
+
+        .about__stats {
+            justify-content: flex-start;
+            gap: $space-xs $space-sm;
+            margin-bottom: $space-md;
+        }
+
+        .about__stat {
+            font-size: 0.6875rem;
+            padding: 0.28rem 0.6rem;
+            border-radius: $radius-full;
+        }
+
+        .about__text {
+            font-size: 0.9375rem;
+            line-height: 1.65;
+            text-align: left;
+
+            &:last-of-type {
+                margin-bottom: 0;
+            }
+        }
+    }
+
+    &:has(> .about--modal) {
+        padding-block: $space-xl;
     }
 
     .about__text {
