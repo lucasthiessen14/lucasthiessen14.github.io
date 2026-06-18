@@ -1,12 +1,11 @@
 import type { MouseEvent } from 'react';
-import MapIcon from '@mui/icons-material/Map';
-import DescriptionIcon from '@mui/icons-material/Description';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useTheme } from '../../context/ThemeContext';
 import { useUiMode } from '../../context/UiModeContext';
 import { scrollToSelector } from '../../utils/scroll';
+import { ViewSwitcher } from './ViewSwitcher';
 
 const NAV_LINKS = [
   { href: '#about', label: 'About' },
@@ -19,7 +18,7 @@ const NAV_LINKS = [
 
 export function Nav() {
   const { theme, toggleTheme } = useTheme();
-  const { mode, toggleMode, gameModeEnabled } = useUiMode();
+  const { mode } = useUiMode();
 
   const closeNav = () => {
     document.body.classList.remove('nav-open');
@@ -78,21 +77,7 @@ export function Nav() {
               )}
             </button>
           )}
-          {gameModeEnabled && (
-            <button
-              type="button"
-              className="nav-icon-btn ui-mode-toggle"
-              id="ui-mode-toggle"
-              aria-pressed={mode === 'game'}
-              aria-label={
-                mode === 'game' ? 'Switch to classic portfolio' : 'Switch to adventure map'
-              }
-              onClick={toggleMode}
-            >
-              <MapIcon className="icon-map" aria-hidden />
-              <DescriptionIcon className="icon-doc" aria-hidden />
-            </button>
-          )}
+          <ViewSwitcher />
           <button
             type="button"
             className="nav-toggle"

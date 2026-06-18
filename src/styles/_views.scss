@@ -1,0 +1,198 @@
+@use 'variables' as *;
+
+.view-switcher-wrap {
+    position: relative;
+}
+
+.view-switcher {
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid var(--border);
+    border-radius: $radius-sm;
+    background: var(--surface);
+    overflow: hidden;
+}
+
+.view-switcher__btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border: none;
+    border-radius: 0;
+    background: transparent;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: color $transition, background $transition;
+
+    &:not(:last-child) {
+        border-right: 1px solid var(--border);
+    }
+
+    &:hover {
+        color: var(--heading);
+        background: var(--surface-hover);
+    }
+
+    &.is-active {
+        color: var(--accent);
+        background: color-mix(in srgb, var(--accent) 12%, var(--surface));
+    }
+
+    svg {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+.view-switcher__prefs {
+    position: absolute;
+    top: calc(100% + $space-xs);
+    right: 0;
+    z-index: 1200;
+    min-width: 12.5rem;
+    padding: $space-sm;
+    border: 1px solid var(--border);
+    border-radius: $radius-md;
+    background: var(--bg-elevated);
+    box-shadow: var(--shadow);
+}
+
+.view-switcher__prefs-label {
+    margin: 0 0 $space-xs;
+    padding: 0 $space-xs;
+    font-family: $font-mono;
+    font-size: 0.625rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+
+.view-switcher__prefs-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 2px;
+}
+
+.view-switcher__prefs-option {
+    display: flex;
+    align-items: center;
+    gap: $space-sm;
+    width: 100%;
+    padding: $space-sm;
+    border: none;
+    border-radius: $radius-sm;
+    background: transparent;
+    color: var(--text);
+    font-size: 0.875rem;
+    font-family: inherit;
+    text-align: left;
+    cursor: pointer;
+    transition: background $transition, color $transition;
+
+    &:hover {
+        background: var(--surface-hover);
+        color: var(--heading);
+    }
+
+    &.is-default {
+        color: var(--accent);
+        background: color-mix(in srgb, var(--accent) 10%, transparent);
+    }
+}
+
+.view-switcher__prefs-icon {
+    width: 18px !important;
+    height: 18px !important;
+    flex-shrink: 0;
+}
+
+.view-switcher__prefs-check {
+    margin-left: auto;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.view-unlock {
+    position: fixed;
+    inset: 0;
+    z-index: 3000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: $space-lg;
+}
+
+.view-unlock__backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+}
+
+.view-unlock__dialog {
+    position: relative;
+    z-index: 1;
+    width: min(100%, 24rem);
+    padding: $space-xl;
+    border-radius: $radius-lg;
+    border: 1px solid var(--border);
+    background: var(--bg-elevated);
+    box-shadow: var(--shadow);
+    text-align: center;
+}
+
+.view-unlock__badge {
+    display: inline-block;
+    margin: 0 0 $space-sm;
+    font-family: $font-mono;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+}
+
+.view-unlock__title {
+    margin: 0 0 $space-sm;
+    font-family: $font-display;
+    font-size: 1.5rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: var(--heading);
+}
+
+.view-unlock__text {
+    margin: 0 0 $space-md;
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    color: var(--text);
+}
+
+.view-unlock__hint {
+    margin: 0 0 $space-lg;
+    font-size: 0.8125rem;
+    line-height: 1.5;
+    color: var(--text-muted);
+}
+
+.view-unlock__actions {
+    display: flex;
+    justify-content: center;
+
+    .btn {
+        min-width: 8rem;
+    }
+}
+
+[data-theme='light'] {
+    .view-unlock__backdrop {
+        background: rgba(15, 23, 42, 0.45);
+    }
+}
