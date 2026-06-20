@@ -1,10 +1,14 @@
 import { useEffect, useRef, useState } from 'react';
 import ArticleIcon from '@mui/icons-material/Article';
 import CheckIcon from '@mui/icons-material/Check';
+import CodeIcon from '@mui/icons-material/Code';
+import CommitIcon from '@mui/icons-material/Commit';
 import DescriptionIcon from '@mui/icons-material/Description';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MapIcon from '@mui/icons-material/Map';
+import SlideshowIcon from '@mui/icons-material/Slideshow';
 import StarIcon from '@mui/icons-material/Star';
+import TerminalIcon from '@mui/icons-material/Terminal';
 import { getViewLabel } from '../../config/views';
 import { useToast } from '../../context/ToastContext';
 import { useUiMode } from '../../context/UiModeContext';
@@ -14,6 +18,10 @@ export const VIEW_ICONS: Partial<Record<ViewId, typeof DescriptionIcon>> = {
   classic: DescriptionIcon,
   game: MapIcon,
   plain: ArticleIcon,
+  shell: TerminalIcon,
+  log: CommitIcon,
+  deck: SlideshowIcon,
+  ide: CodeIcon,
 };
 
 type ViewMenuProps = {

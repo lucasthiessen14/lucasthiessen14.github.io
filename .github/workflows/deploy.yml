@@ -39,6 +39,9 @@ jobs:
           grep -q 'game-mode' dist/assets/*.js
           grep -q 'adventure' dist/assets/*.js
           grep -q 'plain' dist/assets/*.js
+          grep -q 'shell' dist/assets/*.js
+          grep -q 'deck' dist/assets/*.js
+          grep -q 'ide' dist/assets/*.js
 
       - uses: actions/configure-pages@v5
 

@@ -37,6 +37,42 @@ export const DISCOVERABLE_VIEWS: DiscoverableView[] = [
     achievementDescription:
       'You found the plain HTML version of this site — just tags and browser defaults.',
   },
+  {
+    id: 'shell',
+    urlParam: 'view',
+    urlValue: 'shell',
+    label: 'Terminal',
+    achievementTitle: 'Root Access',
+    achievementDescription:
+      'You opened a shell on this portfolio — try ls, cat about, and open github.',
+  },
+  {
+    id: 'log',
+    urlParam: 'view',
+    urlValue: 'log',
+    label: 'Git Log',
+    achievementTitle: 'Commit Archaeologist',
+    achievementDescription:
+      'You traced the git history of this career — every role and project as a commit.',
+  },
+  {
+    id: 'deck',
+    urlParam: 'view',
+    urlValue: 'deck',
+    label: 'Slides',
+    achievementTitle: 'Presenter Mode',
+    achievementDescription:
+      'You entered slide deck mode — arrow keys navigate the portfolio presentation.',
+  },
+  {
+    id: 'ide',
+    urlParam: 'view',
+    urlValue: 'ide',
+    label: 'IDE',
+    achievementTitle: 'Workspace Unlocked',
+    achievementDescription:
+      'You opened the portfolio as a codebase — browse files in the sidebar explorer.',
+  },
 ];
 
 export function findDiscoverableView(params: URLSearchParams): DiscoverableView | null {

@@ -11,11 +11,15 @@ npm run dev
 
 Opens the Vite dev server with hot reload for React, TypeScript, and SCSS.
 
-The adventure map and plain view are hidden until discovered via URL. On desktop, visit:
+The adventure map, plain HTML, terminal, git log, slides, and IDE views are hidden until discovered via URL. On desktop, visit:
 
 ```
 https://lucasthiessen.com/?view=adventure
 https://lucasthiessen.com/?view=plain
+https://lucasthiessen.com/?view=shell
+https://lucasthiessen.com/?view=log
+https://lucasthiessen.com/?view=deck
+https://lucasthiessen.com/?view=ide
 ```
 
 After unlocking once, switch views from the navigation bar.

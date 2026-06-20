@@ -5,6 +5,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { useTheme } from '../../context/ThemeContext';
 import { useUiMode } from '../../context/UiModeContext';
 import { scrollToSelector } from '../../utils/scroll';
+import { isClassicView } from '../../utils/viewModes';
 import { ViewSwitcher } from './ViewSwitcher';
 
 const NAV_LINKS = [
@@ -62,7 +63,7 @@ export function Nav() {
           </ul>
         </div>
         <div className="site-nav__actions">
-          {mode !== 'game' && mode !== 'plain' && (
+          {isClassicView(mode) && (
             <button
               type="button"
               className="nav-icon-btn theme-toggle"

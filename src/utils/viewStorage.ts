@@ -1,12 +1,17 @@
-import { BASE_VIEWS } from '../config/views';
+import { BASE_VIEWS, DISCOVERABLE_VIEWS } from '../config/views';
 import type { ViewId } from '../types/views';
 
 const DISCOVERED_KEY = 'discoveredViews';
 const DEFAULT_VIEW_KEY = 'defaultView';
 const UI_MODE_KEY = 'uiMode';
 
+const ALL_VIEW_IDS = new Set<string>([
+  ...BASE_VIEWS,
+  ...DISCOVERABLE_VIEWS.map((view) => view.id),
+]);
+
 function isViewId(value: string): value is ViewId {
-  return value === 'classic' || value === 'game' || value === 'plain';
+  return ALL_VIEW_IDS.has(value);
 }
 
 export function readDiscoveredViews(): ViewId[] {
