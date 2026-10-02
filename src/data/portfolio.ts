@@ -151,6 +151,6 @@ export const skillsGroups = [
   },
   {
     label: 'Web & data',
-    items: ['JavaScript', 'Node.js', 'React', 'PHP', 'Laravel', 'HTML/CSS', 'SQL', 'Express'],
+    items: ['TypeScript', 'JavaScript', 'Node.js', 'React', 'PHP', 'Laravel', 'HTML/CSS', 'SQL', 'Express'],
   },
 ];
